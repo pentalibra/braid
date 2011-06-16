@@ -5,26 +5,26 @@
 
 Create a new braid:
 \itemize{
-\code{\link{as.braid}}
+\item{\code{\link{as.braid}}}
 }
 
 Report writing commands:
 \itemize{
-\code{\link{braid_heading}}
-\code{\link{braid_write}}
-\code{\link{braid_plot}}
+\item{\code{\link{braid_heading}}}
+\item{\code{\link{braid_write}}}
+\item{\code{\link{braid_plot}}}
 }
 
 Save results to file: 
 \itemize{
-\code{\link{braid_save}}
+\item{\code{\link{braid_save}}}
 }
 
 Compile to PDF:
 \itemize{
-\code{\link{braid_latex_outline}}
-\code{\link{braid_compile}}
-}
+\item{\code{\link{braid_latex_outline}}}
+\item{\code{\link{braid_compile}}}
+}}
 \alias{braid}
 \alias{package-braid}
 \docType{package}

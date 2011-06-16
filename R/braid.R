@@ -17,6 +17,7 @@ braid_heading <- function(braid, x, headinglevel="chapter", pagebreak=FALSE){
   text <- paste("\\", headinglevel, "{", latexTranslate(x), "}", "\n", sep="")
   if(pagebreak) text <- paste(text, "\\pagebreak[4]\n")
   braid_write(braid, text)
+  invisible(NULL)
 }
 
 
@@ -33,6 +34,7 @@ braid_heading <- function(braid, x, headinglevel="chapter", pagebreak=FALSE){
 braid_write <- function(braid, x, suffix="default"){
   if(suffix=="default") suffix <- "\n"
   braid_append_text(braid, paste(x, suffix, sep=""))
+  invisible(NULL)
 }
 ###############################################################################
 
@@ -48,6 +50,7 @@ braid_save <- function(braid){
   on.exit(close(sfile))
   cat(text, file=sfile, append=TRUE)
   braid_append_text(braid, reset=TRUE)
+  invisible(NULL)
 }
 
 
@@ -105,6 +108,7 @@ braid_plot <- function(braid, x, filename=braid_filename(braid),
     print(x)
   } 
   braid_write(braid, paste("  \\PlaceGraph{", "graphics", "/", filename, "}", sep=""))
+  invisible(NULL)
 }
 
 ###############################################################################
@@ -125,7 +129,8 @@ braid_compile <- function(latexfile, output="pdf")
     ### Compile latex file to PDF
     message("Starting to compile PDF document")
     suppressWarnings(tools::texi2dvi(latexfile, pdf=TRUE, clean=TRUE))
-    message("All done\n\n")
+    message("All done.  Your file should now be ready:")
+    message(paste(sub(".tex$", ".pdf", latexfile), "\n"))
   } else {
     stop(paste("In braid_compile: Output format", output, "not supported"))
   }

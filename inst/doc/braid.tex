@@ -85,28 +85,24 @@ First, set up a braid object.  The following code sets up a braid object.  A bra
 
 Now, lets create some headings, text and graphics to go into the report.
 
-There are three essential report elements:
+There are three essential report elements in a typical report:
+
+\begin{itemize}
+	\item \code{braid\_heading()}
+	\item \code{braid\_write()}
+	\item \code{braid\_plot()}
+\end{itemize}
 
 
 \begin{Schunk}
 \begin{Sinput}
 > braid_heading(b, "This is a test")
-\end{Sinput}
-\begin{Soutput}
-[1] "\\chapter{This is a test}\n\n"
-\end{Soutput}
-\begin{Sinput}
 > braid_write(b, "This should be a normal paragraph.")
+> braid_write(b, "Let's create a simple plot.")
+> library(ggplot2)
+> p <- ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width)) + geom_point(alpha = 0.5)
+> braid_plot(b, p)
 \end{Sinput}
-\begin{Soutput}
-[1] "\\chapter{This is a test}\n\nThis should be a normal paragraph.\n"
-\end{Soutput}
-\begin{Sinput}
-> braid_write(b, "And another")
-\end{Sinput}
-\begin{Soutput}
-[1] "\\chapter{This is a test}\n\nThis should be a normal paragraph.\nAnd another\n"
-\end{Soutput}
 \end{Schunk}
 
 \section{Save and compile results}
@@ -116,17 +112,18 @@ To save and compile:
 \begin{Schunk}
 \begin{Sinput}
 > braid_save(b)
+> braid_latex_outline(path_latex = latex_path, output_filename = outline_file, 
++     content_filename = content_file, title = "Test", author = "I am the author")
+> braid_compile(file.path(latex_path, outline_file))
 \end{Sinput}
-\begin{Soutput}
-[1] ""
-\end{Soutput}
 \end{Schunk}
 
+If you have not received any error messages, the pdf output should now be ready to 
 
 
 \section{Final thoughts}
 
-The last word.
+The last word....
 
 
 % Start a new page

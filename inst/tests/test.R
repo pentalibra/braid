@@ -75,7 +75,7 @@ test_that("braid_write appends output to file", {
     )
       
     x <- braid_write(b, "Test output")
-    expect_that(x, equals("Test output\n"))
+    expect_that(x, equals(NULL))
     braid_save(b)
     expect_that(file.exists(sinkfile), equals(TRUE))
     braid_write(b, "Line 2\n")
@@ -131,6 +131,7 @@ test_that("braid_plot saves ggplot", {
       )
       filename <- braid_filename(b, counter=1, prefix="fig", suffix="%04d", ext=".pdf")
       
+      require(ggplot2)
       t <- ggplot(mtcars, aes(factor(cyl))) + geom_bar()
       braid_plot(b, t)
       braid_save(b)
@@ -182,6 +183,9 @@ test_that("braid file gets compiled",{
       braid_heading(b, "This is a test")
       braid_write(b, "This should be a normal paragraph.")
       braid_write(b, "And another")
+      t <- ggplot(mtcars, aes(factor(cyl))) + geom_bar()
+      braid_plot(b, t)
+      
       braid_save(b)
       braid_compile(file.path(latex_path, outline_file))
       expect_that(file.exists(file.path(latex_path, pdf_file)), is_true())
