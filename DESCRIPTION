@@ -1,0 +1,20 @@
+Package: braid
+Imports:
+Maintainer: Andrie de Vries <apdevries@gmail.com>
+License: GPL (>=2)
+Title: A report writing system that creates and compiles LaTEX and pdf
+    output
+LazyData: true
+LazyLoad: true
+Author: Andrie de Vries <apdevries@gmail.com>
+Description: This package tries to solve the problem of writing simple
+    reports in R, without having to learn LaTEX and SWeave first.  At
+    the moment it supports creation of PDF files via LaTEX only.
+Author@R: person("Andrie", "de Vries", email="apdevries@gmail.com")
+Version: 0.0-04
+URL:
+Date: 2011-06-16
+Depends: R (>= 2.11.0), Hmisc, xtable, tools
+Suggests: lattice, ggplot
+Collate: 'braid-package.R' 'braid.R' 'braid_object.R' 'latex-outline.R'
+    'latex.R'
