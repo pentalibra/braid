@@ -71,7 +71,7 @@ path <- file.path("f:", "git", "braid", "test")
 latex_path <- file.path(path, "latex")
 graph_path <- file.path(latex_path, "graphics")
 sinkfile   <- file.path(latex_path, "braid_test.tex")
-outline_file <- "Outline.tex"
+outline_file <- file.path(latex_path, "Outline.tex")
 content_file <- "Content.tex"
 pdf_file <- "Outline.pdf"
 
@@ -113,12 +113,11 @@ To save and compile:
 <<echo=TRUE>>=
 braid_save(b)
 braid_latex_outline(
-    path_latex=latex_path, 
     output_filename=outline_file,
     content_filename=content_file,
     title="Test",
     author="I am the author")
-braid_compile(file.path(latex_path, outline_file))
+braid_compile(outline_file)
 @
 
 If you have not received any error messages, the pdf output should now be ready to 

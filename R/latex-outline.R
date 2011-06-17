@@ -19,13 +19,12 @@
 #'  - Contain all the document pre-amble
 #'  - In the main body section, have a \\input{} line that calls the braid content file.
 #' 
-#' @param path_latex Destination directory
 #' @param output_filename The file name to use when writing the outline to disk
 #' @param content_filename The name of the braid content file (this is embedded in the outline file using a \\input{} statement in Latex
 #' @param title Document title.  You can use valid latex, including newline \\ - remember to use escape sequences
 #' @param author Document author.  You can use valid latex.
 #' @export
-braid_latex_outline <- function(path_latex, output_filename, content_filename, title, author){
+braid_latex_outline <- function(output_filename, content_filename, title, author){
   ret <- paste("
   \\documentclass[a4paper, 10pt]{report}
   
@@ -83,8 +82,9 @@ braid_latex_outline <- function(path_latex, output_filename, content_filename, t
   ### Now prepare file
   
   r_braid <- as.braid(
-      path_latex = path_latex, 
-      output_filename=file.path(path_latex, output_filename)
+      path_latex = dirname(output_filename), 
+      #output_filename=file.path(path_latex, output_filename)
+      output_filename=output_filename
   )
   braid_write(r_braid, ret)
   braid_save(r_braid)

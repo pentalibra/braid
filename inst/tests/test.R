@@ -150,11 +150,11 @@ if (file.exists(file.path(latex_path, sinkfile))){
 
 context("Create and compile braid object")
 
-outline_file <- "Outline.tex"
+outline_file <- file.path(latex_path, "Outline.tex")
 content_file <- "Content.tex"
 pdf_file <- "Outline.pdf"
-if (file.exists(file.path(latex_path, outline_file))){
-  file.remove(file.path(latex_path, outline_file))
+if (file.exists(outline_file)){
+  file.remove(outline_file)
 }
 if (file.exists(file.path(latex_path, content_file))){
   file.remove(file.path(latex_path, content_file))
@@ -166,12 +166,12 @@ if (file.exists(file.path(latex_path, pdf_file))){
 
 test_that("braid_outline is created", {
       braid_latex_outline(
-          path_latex=latex_path, 
+          #path_latex=latex_path, 
           output_filename=outline_file,
           content_filename=content_file,
           title="Test",
           author="I am the author")
-      expect_that(file.exists(file.path(latex_path, outline_file)), is_true())
+      expect_that(file.exists(outline_file), is_true())
 })
 
 test_that("braid file gets compiled",{
@@ -187,7 +187,7 @@ test_that("braid file gets compiled",{
       braid_plot(b, t)
       
       braid_save(b)
-      braid_compile(file.path(latex_path, outline_file))
+      braid_compile(outline_file)
       expect_that(file.exists(file.path(latex_path, pdf_file)), is_true())
       
     })

@@ -11,10 +11,10 @@ Description: This package tries to solve the problem of writing simple
     reports in R, without having to learn LaTEX and SWeave first.  At
     the moment it supports creation of PDF files via LaTEX only.
 Author@R: person("Andrie", "de Vries", email="apdevries@gmail.com")
-Version: 0.0-04
+Version: 0.0-05
 URL:
-Date: 2011-06-16
-Depends: R (>= 2.11.0), Hmisc, xtable, tools
+Date: 2011-06-17
+Depends: Hmisc, xtable, tools
 Suggests: lattice, ggplot2
 Collate: 'braid-package.R' 'braid.R' 'braid_object.R' 'latex-outline.R'
     'latex.R'
