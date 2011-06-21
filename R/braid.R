@@ -128,6 +128,7 @@ braid_compile <- function(latexfile, output="pdf")
   if(output=="pdf"){
     ### Compile latex file to PDF
     message("Starting to compile PDF document")
+    suppressWarnings(tools::texi2dvi(latexfile, pdf=TRUE, clean=FALSE))
     suppressWarnings(tools::texi2dvi(latexfile, pdf=TRUE, clean=TRUE))
     message("All done.  Your file should now be ready:")
     message(paste(sub(".tex$", ".pdf", latexfile), "\n"))
