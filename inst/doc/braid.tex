@@ -76,8 +76,8 @@ First, set up a braid object.  The following code sets up a braid object.  A bra
 > outline_file <- file.path(latex_path, "Outline.tex")
 > content_file <- "Content.tex"
 > pdf_file <- "Outline.pdf"
-> b <- as.braid(path_latex = latex_path, path_graphics = graph_path, 
-+     output_filename = file.path(latex_path, content_file))
+> b <- as.braid(pathLatex = latex_path, pathGraphics = graph_path, 
++     outputFilename = file.path(latex_path, content_file))
 \end{Sinput}
 \end{Schunk}
 
@@ -96,12 +96,12 @@ There are three essential report elements in a typical report:
 
 \begin{Schunk}
 \begin{Sinput}
-> braid_heading(b, "This is a test")
-> braid_write(b, "This should be a normal paragraph.")
-> braid_write(b, "Let's create a simple plot.")
+> braidHeading(b, "This is a test")
+> braidWrite(b, "This should be a normal paragraph.")
+> braidWrite(b, "Let's create a simple plot.")
 > library(ggplot2)
 > p <- ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width)) + geom_point(alpha = 0.5)
-> braid_plot(b, p)
+> braidPlot(b, p)
 \end{Sinput}
 \end{Schunk}
 
@@ -111,10 +111,10 @@ To save and compile:
 
 \begin{Schunk}
 \begin{Sinput}
-> braid_save(b)
-> braid_latex_outline(output_filename = outline_file, content_filename = content_file, 
+> braidSave(b)
+> braid_latex_outline(outputFilename = outline_file, content_filename = content_file, 
 +     title = "Test", author = "I am the author")
-> braid_compile(outline_file)
+> braidCompile(outline_file)
 \end{Sinput}
 \end{Schunk}
 

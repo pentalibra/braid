@@ -1,4 +1,5 @@
-# TODO: Add comment
+# Braid function definitions
+
 # 
 # Author: Andrie
 ###############################################################################
@@ -13,10 +14,10 @@
 #' @param headinglevel Character vector corresponding to latex heading, e.g. Chapter, Section, etc.
 #' @param pagebreak Forces a page break if TRUE
 #' @export
-braid_heading <- function(braid, x, headinglevel="chapter", pagebreak=FALSE){
+braidHeading <- function(braid, x, headinglevel="chapter", pagebreak=FALSE){
   text <- paste("\\", headinglevel, "{", latexTranslate(x), "}", "\n", sep="")
   if(pagebreak) text <- paste(text, "\\pagebreak[4]\n")
-  braid_write(braid, text)
+  braidWrite(braid, text)
   invisible(NULL)
 }
 
@@ -31,9 +32,9 @@ braid_heading <- function(braid, x, headinglevel="chapter", pagebreak=FALSE){
 #' @param x A character vector of text
 #' @param suffix A character vector to be appended to x, by default a line break
 #' @export
-braid_write <- function(braid, x, suffix="default"){
+braidWrite <- function(braid, x, suffix="default"){
   if(suffix=="default") suffix <- "\n"
-  braid_append_text(braid, paste(x, suffix, sep=""))
+  braidAppendText(braid, paste(x, suffix, sep=""))
   invisible(NULL)
 }
 ###############################################################################
@@ -44,12 +45,12 @@ braid_write <- function(braid, x, suffix="default"){
 #' 
 #' @param braid A braid object
 #' @export
-braid_save <- function(braid){
-  text <- braid_append_text(braid)
-  sfile <- file(braid$output_filename, "at")  ### Open file in append mode
+braidSave <- function(braid){
+  text <- braidAppendText(braid)
+  sfile <- file(braid$outputFilename, "at")  ### Open file in append mode
   on.exit(close(sfile))
   cat(text, file=sfile, append=TRUE)
-  braid_append_text(braid, reset=TRUE)
+  braidAppendText(braid, reset=TRUE)
   invisible(NULL)
 }
 
@@ -65,7 +66,7 @@ braid_save <- function(braid){
 #' @param suffix Filename suffix
 #' @param ext Filename extension, by default ".pdf"
 #' @export
-braid_filename <- function(b, counter=braid_inc_counter(b), 
+braidFilename <- function(b, counter=braidIncCounter(b), 
     prefix="fig", format="default", suffix="", ext=".pdf"){
   if(format=="default") format <- "%04d"
   paste(prefix, sprintf(format, counter), suffix, ext, sep="")
@@ -83,9 +84,9 @@ braid_filename <- function(b, counter=braid_inc_counter(b),
 #' @param width Width in inches
 #' @param height Heigh in inches
 #' @export
-braid_plot <- function(braid, x, filename=braid_filename(braid), 
-    width=braid$default_plot_size[1], 
-    height=braid$default_plot_size[2]){
+braidPlot <- function(braid, x, filename=braidFilename(braid), 
+    width=braid$defaultPlotSize[1], 
+    height=braid$defaultPlotSize[2]){
   if(inherits(x, "ggplot")){
     require(ggplot2)
     ggplot2::ggsave(
@@ -94,20 +95,20 @@ braid_plot <- function(braid, x, filename=braid_filename(braid),
         width    = width, 
         height   = height,
         dpi      = braid$dpi, 
-        path     = braid$path_graphics
+        path     = braid$pathGraphics
     )
   } 
   if(inherits(x, "trellis")){
     require(lattice)
     on.exit(dev.off())
     pdf(
-        file=file.path(braid$path_graphics, filename),
+        file=file.path(braid$pathGraphics, filename),
         width    = width, 
         height   = height
     )
     print(x)
   } 
-  braid_write(braid, paste("  \\PlaceGraph{", "graphics", "/", filename, "}", sep=""))
+  braidWrite(braid, paste("  \\PlaceGraph{", "graphics", "/", filename, "}", sep=""))
   invisible(NULL)
 }
 
@@ -115,12 +116,12 @@ braid_plot <- function(braid, x, filename=braid_filename(braid),
 
 #' Compiles braid latex file to PDF or other output
 #' 
-#' This is a wrapper around \code{\link{tools::texi2dvi}} to convert a latex file to PDF output.  No other formats are currently supported.
+#' This is a wrapper around \code{\link[tools]{texi2dvi}} to convert a latex file to PDF output.  No other formats are currently supported.
 #' 
 #' @param latexfile File location of a latex file
 #' @param output Determines what type of output to produce.  Default to "pdf", currently the only supported format
 #' @export
-braid_compile <- function(latexfile, output="pdf")
+braidCompile <- function(latexfile, output="pdf")
 {
   old_wd <- getwd()
   setwd(dirname(latexfile))
@@ -133,7 +134,7 @@ braid_compile <- function(latexfile, output="pdf")
     message("All done.  Your file should now be ready:")
     message(paste(sub(".tex$", ".pdf", latexfile), "\n"))
   } else {
-    stop(paste("In braid_compile: Output format", output, "not supported"))
+    stop(paste("In braidCompile: Output format", output, "not supported"))
   }
   invisible(NULL)
 }

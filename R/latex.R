@@ -18,7 +18,6 @@
 #' @param greek set to TRUE to have latexTranslate put names for greek letters
 #' in math mode and add backslashes
 #' @param ... ignored 
-#' @param inn
 #' @keywords internal
 latexTranslate <- function (object, inn = NULL, out = NULL, pb = FALSE, greek = FALSE, 
 		...) 

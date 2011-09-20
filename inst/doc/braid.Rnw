@@ -76,9 +76,9 @@ content_file <- "Content.tex"
 pdf_file <- "Outline.pdf"
 
 b <- as.braid(
-    path_latex    = latex_path, 
-    path_graphics = graph_path,
-    output_filename=file.path(latex_path, content_file)
+    pathLatex    = latex_path, 
+    pathGraphics = graph_path,
+    outputFilename=file.path(latex_path, content_file)
 )
 @
 
@@ -96,14 +96,14 @@ There are three essential report elements in a typical report:
 
 
 <<echo=TRUE>>=
-braid_heading(b, "This is a test")
-braid_write(b, "This should be a normal paragraph.")
-braid_write(b, "Let's create a simple plot.")
+braidHeading(b, "This is a test")
+braidWrite(b, "This should be a normal paragraph.")
+braidWrite(b, "Let's create a simple plot.")
 
 library(ggplot2)
 p <- ggplot(iris, aes(x=Sepal.Length, y=Sepal.Width)) + 
     geom_point(alpha=0.5)
-braid_plot(b, p)
+braidPlot(b, p)
 @
 
 \section{Save and compile results}
@@ -111,13 +111,13 @@ braid_plot(b, p)
 To save and compile:
 
 <<echo=TRUE>>=
-braid_save(b)
+braidSave(b)
 braid_latex_outline(
-    output_filename=outline_file,
+    outputFilename=outline_file,
     content_filename=content_file,
     title="Test",
     author="I am the author")
-braid_compile(outline_file)
+braidCompile(outline_file)
 @
 
 If you have not received any error messages, the pdf output should now be ready to 

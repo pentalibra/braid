@@ -1,4 +1,4 @@
-# TODO: Add comment
+# Braid package documentation
 # 
 # Author: Andrie
 ###############################################################################
@@ -15,20 +15,20 @@
 #' 
 #' Report writing commands:
 #' \itemize{
-#' \item{\code{\link{braid_heading}}}
-#' \item{\code{\link{braid_write}}}
-#' \item{\code{\link{braid_plot}}}
+#' \item{\code{\link{braidHeading}}}
+#' \item{\code{\link{braidWrite}}}
+#' \item{\code{\link{braidPlot}}}
 #' }
 #' 
 #' Save results to file: 
 #' \itemize{
-#' \item{\code{\link{braid_save}}}
+#' \item{\code{\link{braidSave}}}
 #' }
 #' 
 #' Compile to PDF:
 #' \itemize{
 #' \item{\code{\link{braid_latex_outline}}}
-#' \item{\code{\link{braid_compile}}}
+#' \item{\code{\link{braidCompile}}}
 #' } 
 #' @name package-braid
 #' @aliases braid package-braid
