@@ -68,8 +68,8 @@ latexTranslate <- function (object, inn = NULL, out = NULL, pb = FALSE, greek = 
 #' @param to a vector of character strings to translate to, for sedit. If a corresponding element in from had an "*", the element in to may also have an "*". Only single asterisks are allowed. If to is not the same length as from, the rep function is used to make it the same length.
 #' @param test a function of a vector of character strings returning a logical vector whose elements are TRUE or FALSE according to whether that string element qualifies as the wild card string for sedit, replace.substring.wild  
 #' @param wild.literal set to TRUE to not treat asterisks as wild cards and to not look for "^" or "$" in old  
-#' @param keywords Internal
 #' @note This code is copied from Hmisc
+#' @keywords Internal
 sedit <- function (text, from, to, test = NULL, wild.literal = FALSE) 
 {
   to <- rep(to, length = length(from))
