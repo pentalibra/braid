@@ -1,7 +1,7 @@
 # Test functionality using testthat library
 # 
 # Author: Andrie
-###############################################################################
+#------------------------------------------------------------------------------
 
 
 
@@ -11,56 +11,12 @@ latex_path <- file.path(path, "latex")
 graph_path <- file.path(latex_path, "graphics")
 sinkfile   <- file.path(latex_path, "braid_test.tex")
 
-file.remove(list.files(graph_path, full.names=TRUE))
-if (file.exists(file.path(latex_path, sinkfile))){
-  file.remove(file.path(latex_path, sinkfile))
+clearFiles <- function(){
+  file.remove(list.files(graph_path, full.names=TRUE))
+  if (file.exists(file.path(latex_path, sinkfile))){
+    file.remove(file.path(latex_path, sinkfile))
+  }
 }
-
-
-
-
-###############################################################################
-
-context("Test braid appender")
-
-test_that("braid counter incrementing works", {
-      b <- as.braid(
-          pathLatex    = latex_path,
-          pathGraphics = graph_path,
-          outputFilename=sinkfile
-      )
-      expect_that(braidAppendText(b, "a"), equals("a"))
-      expect_that(braidAppendText(b, "b"), equals("ab"))
-      expect_that(braidAppendText(b, "c"), equals("abc"))
-    })
-
-###############################################################################
-
-context("Test braid counter and file naming")
-
-test_that("braid counter incrementing works", {
-      b <- as.braid(
-          pathLatex    = latex_path,
-          pathGraphics = graph_path,
-          outputFilename=sinkfile
-      )
-      expect_that(braidIncCounter(b), equals(1))
-      expect_that(braidIncCounter(b), equals(2))
-      expect_that(braidIncCounter(b), equals(3))
-    })
-
-test_that("braid filenames are correct", {
-      b <- as.braid(
-          pathLatex    = latex_path,
-          pathGraphics = graph_path,
-          outputFilename=sinkfile
-      )
-      expect_that(braidFilename(b), equals("fig0001.pdf"))
-      fn <- braidFilename(b, prefix="Gr", suffix="_x", ext=".png")
-      #print(fn)
-      expect_that(fn, equals("Gr0002_x.png"))
-      expect_that(braidFilename(b, format="%02d"), equals("fig03.pdf"))
-    })
 
 #------------------------------------------------------------------------------
 
@@ -68,6 +24,7 @@ context("braidWrite")
 
 test_that("braidWrite appends output to file", {
 
+    clearFiles()
     b <- as.braid(
         pathLatex    = latex_path,
         pathGraphics = graph_path,
@@ -92,59 +49,78 @@ context("braidHeading")
 
 test_that("braidHeading writes correct output to file",{
       
-    b <- as.braid(
+      clearFiles()
+      b <- as.braid(
         pathLatex    = latex_path,
         pathGraphics = graph_path,
         outputFilename=sinkfile
-    )
-    
-    braidHeading(b, "Heading level 1")
-    braidSave(b)
-    ret <- readLines(con=sinkfile)
-    expect_equal(ret, c("\\chapter{Heading level 1}", ""))
-})
-
-#------------------------------------------------------------------------------
-
-context("braidPlot - trellis")
-
-test_that("braidPlot saves trellis plot", {
-      b <- as.braid(
-          pathLatex    = latex_path,
-          pathGraphics = graph_path,
-          outputFilename=sinkfile
       )
-      filename <- braidFilename(b, counter=1, prefix="fig", suffix="%04d", ext=".pdf")
       
-      Depth <- lattice::equal.count(quakes$depth, number=8, overlap=.1)
-      t <- lattice::xyplot(lat ~ long | Depth, data = quakes)
-      
-      braidPlot(b, t)
+      braidHeading(b, "Heading level 1")
       braidSave(b)
-      
-      test <- readLines(con=sinkfile)
-      rest <- c("  \\PlaceGraph{graphics/fig0001.pdf}")
-      expect_equal(test, rest)
-    })
+      ret <- readLines(con=sinkfile)
+      expect_equal(ret, c("\\chapter{Heading level 1}", ""))
+})
 
 #------------------------------------------------------------------------------
 
 context("braidPlot - ggplot")
 
 test_that("braidPlot saves ggplot", {
+      clearFiles()
       b <- as.braid(
           pathLatex    = latex_path,
           pathGraphics = graph_path,
           outputFilename=sinkfile
       )
-      filename <- braidFilename(b, counter=1, prefix="fig", suffix="%04d", ext=".pdf")
+      filename <- braidFilename(b, counter=1, prefix="fig", suffix="a", ext=".pdf")
+      expect_equal(braidAppendPlot(b), NULL)
       
       require(ggplot2)
       t <- ggplot(mtcars, aes(factor(cyl))) + geom_bar()
-      braidPlot(b, t)
+
+      braidPlot(b, t, filename)
+      test <- braidAppendPlot(b)
+      rest <- list(list(plot=t, filename=filename, width=5, height=3))
+      expect_equal(test, rest)
+      
       braidSave(b)
+      plotfile <- file.path(graph_path, "fig0001a.pdf")
+      expect_true(file.exists(plotfile))
+
       test <- readLines(con=sinkfile)
-      rest <- c("  \\PlaceGraph{graphics/fig0001.pdf}")
+      rest <- c("  \\PlaceGraph{graphics/fig0001a.pdf}")
+      expect_equal(test, rest)
+    })
+
+#------------------------------------------------------------------------------
+
+context("braidPlot - trellis")
+
+test_that("braidPlot saves trellis plot", {
+      clearFiles()
+      b <- as.braid(
+          pathLatex    = latex_path,
+          pathGraphics = graph_path,
+          outputFilename=sinkfile
+      )
+      filename <- braidFilename(b, counter=1, prefix="fig", suffix="a", ext=".pdf")
+      
+      Depth <- lattice::equal.count(quakes$depth, number=8, overlap=.1)
+      t <- lattice::xyplot(lat ~ long | Depth, data = quakes)
+      
+      braidPlot(b, t, filename=filename)
+      
+      test <- braidAppendPlot(b)
+      rest <- list(list(plot=t, filename=filename, width=5, height=3))
+      expect_equal(test, rest)
+      
+      braidSave(b)
+      plotfile <- file.path(graph_path, "fig0001a.pdf")
+      expect_true(file.exists(plotfile))
+      
+      test <- readLines(con=sinkfile)
+      rest <- c("  \\PlaceGraph{graphics/fig0001a.pdf}")
       expect_equal(test, rest)
     })
 

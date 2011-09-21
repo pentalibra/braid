@@ -1,8 +1,7 @@
 # Braid function definitions
-
-# 
+#
 # Author: Andrie
-###############################################################################
+#------------------------------------------------------------------------------
 
 
 #' Creates braid heading in latex format and writes results to output file. 
@@ -21,8 +20,7 @@ braidHeading <- function(braid, x, headinglevel="chapter", pagebreak=FALSE){
   invisible(NULL)
 }
 
-
-###############################################################################
+#------------------------------------------------------------------------------
 
 #' Appends text to braid output file.
 #' 
@@ -37,23 +35,8 @@ braidWrite <- function(braid, x, suffix="default"){
   braidAppendText(braid, paste(x, suffix, sep=""))
   invisible(NULL)
 }
-###############################################################################
 
-#' Writes result to braid output file.
-#' 
-#' Writes result to braid output file.
-#' 
-#' @param braid A braid object
-#' @export
-braidSave <- function(braid){
-  text <- braidAppendText(braid)
-  sfile <- file(braid$outputFilename, "at")  ### Open file in append mode
-  on.exit(close(sfile))
-  cat(text, file=sfile, append=TRUE)
-  braidAppendText(braid, reset=TRUE)
-  invisible(NULL)
-}
-
+#------------------------------------------------------------------------------
 
 #' Generates filename to use when saving plots.
 #' 
@@ -72,7 +55,7 @@ braidFilename <- function(b, counter=braidIncCounter(b),
   paste(prefix, sprintf(format, counter), suffix, ext, sep="")
 }
 
-###############################################################################
+#------------------------------------------------------------------------------
 
 #' Saves braid plot to pdf.
 #' 
@@ -87,32 +70,12 @@ braidFilename <- function(b, counter=braidIncCounter(b),
 braidPlot <- function(braid, x, filename=braidFilename(braid), 
     width=braid$defaultPlotSize[1], 
     height=braid$defaultPlotSize[2]){
-  if(inherits(x, "ggplot")){
-    require(ggplot2)
-    ggplot2::ggsave(
-        filename = filename, 
-        plot=x, 
-        width    = width, 
-        height   = height,
-        dpi      = braid$dpi, 
-        path     = braid$pathGraphics
-    )
-  } 
-  if(inherits(x, "trellis")){
-    require(lattice)
-    on.exit(dev.off())
-    pdf(
-        file=file.path(braid$pathGraphics, filename),
-        width    = width, 
-        height   = height
-    )
-    print(x)
-  } 
   braidWrite(braid, paste("  \\PlaceGraph{", "graphics", "/", filename, "}", sep=""))
+  braidAppendPlot(braid, x, filename, width, height)
   invisible(NULL)
 }
 
-###############################################################################
+#------------------------------------------------------------------------------
 
 #' Compiles braid latex file to PDF or other output
 #' 

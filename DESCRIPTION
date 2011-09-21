@@ -12,9 +12,9 @@ Description: This package tries to solve the problem of
     creation of PDF files via LaTEX only.
 Author@R: person("Andrie", "de Vries",
     email="apdevries@gmail.com")
-Version: 0.0-08
+Version: 0.0-09
 URL:
-Date: 2011-09-20
+Date: 2011-09-21
 Depends:
     xtable,
     tools
@@ -26,4 +26,7 @@ Collate:
     'braid.R'
     'latex-outline.R'
     'latex.R'
-    'braidObject.R'
+    'braid-object.R'
+    'braidSave.R'
+    'plotAppender.R'
+    'textAppender.R'

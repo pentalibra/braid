@@ -1,6 +1,6 @@
 \name{latexTranslate}
 \alias{latexTranslate}
-\title{Prints a string to Latex, dealing with special characters}
+\title{Prints a string to Latex, dealing with special characters.}
 \usage{
   latexTranslate(object, inn = NULL, out = NULL, pb =
   FALSE, greek = FALSE, ...)
@@ -27,13 +27,13 @@
   format, e.g., makes a^2 = a\$^2\$ for superscript within
   variable labels. LaTeX names of greek letters (e.g.,
   "alpha") will have backslashes added if greek==TRUE. Math
-  mode is inserted as needed. latexTranslate assumes that
-  input text always has matches, e.g. [) [] (] (), and that
-  surrounding by \$\$ is OK.
+  mode is inserted as needed. \code{latexTranslate} assumes
+  that input text always has matches, e.g. [) [] (] (), and
+  that surrounding by \$\$ is OK.
 }
 \note{
   This code is copied from Hmisc.  Hmisc used to export
   this function.
 }
-\keyword{internal}
+\keyword{Internal}
 
