@@ -1,0 +1,16 @@
+braid 0.0-09
+------------
+
+IMPROVEMENTS
+* braidPlot no longer creates output files immediately.  Instead, all plots are queued and all saved when braidSave is called. 
+
+braid 0.0-06
+------------
+
+IMPROVEMENTS AND BUG FIXES
+* Changed all function names to camelCase
+
+braid 0.0-06
+------------
+
+First publication to github
