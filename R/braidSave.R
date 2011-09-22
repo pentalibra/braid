@@ -25,43 +25,60 @@ braidSave <- function(braid){
 #------------------------------------------------------------------------------
 
 braidSavePlotOne <- function(plotElement, braid){
-  x        <- plotElement$plot
+  plotcode <- plotElement$plot
   filename <- plotElement$filename
   width    <- plotElement$width
   height   <- plotElement$height
-  if(inherits(x, "ggplot")){
-    require(ggplot2)
-    ggplot2::ggsave(
-        filename = filename, 
-        plot=x, 
-        width    = width, 
-        height   = height,
-        dpi      = braid$dpi, 
-        path     = braid$pathGraphics
-    )
-  } 
-  if(inherits(x, "trellis")){
-    require(lattice)
-    on.exit(dev.off())
-    pdf(
-        file=file.path(braid$pathGraphics, filename),
-        width    = width, 
-        height   = height
-    )
-    print(x)
-  } 
   
-  file.exists(file.path(braid$pathGraphics, filename))
+  pEx <- plotExists(braid, plotcode, filename, width, height)
+  if(!pEx){
+    
+    if(inherits(plotcode, "ggplot")){
+      require(ggplot2)
+      ggplot2::ggsave(
+          filename = filename, 
+          plot     = plotcode, 
+          width    = width, 
+          height   = height,
+          dpi      = braid$dpi, 
+          path     = braid$pathGraphics
+      )
+    } 
+    if(inherits(plotcode, "trellis")){
+      require(lattice)
+      on.exit(dev.off())
+      pdf(
+          file=file.path(braid$pathGraphics, filename),
+          width    = width, 
+          height   = height
+      )
+      print(plotcode)
+    } 
+    savePlotRecord(braid, plotcode, filename, width, height)
+  }
+  ret <- file.exists(file.path(braid$pathGraphics, filename))
+#  if(ret) message(paste("Saved", filename))
+  ret
   
 }
 
 #------------------------------------------------------------------------------
 
 braidSavePlot <- function(braid){
+  #multiCore <- braid$multiCore
   plotlist <- braidAppendPlot(braid, NULL)
   if(!is.null(plotlist)){
-    ret <- sapply(plotlist, braidSavePlotOne, braid)
-    if(all(ret)) TRUE else FALSE
+#    if(multiCore){
+#      require(doSMP)
+#      workers <- doSMP::startWorkers(2)
+#      on.exit(doSMP::stopWorkers(workers))
+#      doSMP::registerDoSMP(workers)
+#      ret <- laply(plotlist, braidSavePlotOne, braid, .parallel=multiCore)
+#    } else {
+      progressBar <- ifelse(length(plotlist) >= 5, "tk", "none")
+      ret <- plyr::laply(plotlist, braidSavePlotOne, braid, .progress=progressBar)
+#    }
+    ret <- all(ret)
   } else {
     ret <- FALSE
   }

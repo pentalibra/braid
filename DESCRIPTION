@@ -12,13 +12,16 @@ Description: This package tries to solve the problem of
     creation of PDF files via LaTEX only.
 Author@R: person("Andrie", "de Vries",
     email="apdevries@gmail.com")
-Version: 0.0-09
+Version: 0.1-00
 URL:
 Date: 2011-09-21
 Depends:
+    plyr,
+    Hmisc,
     xtable,
     tools
 Suggests:
+    doSMP,
     lattice,
     ggplot2
 Collate:
@@ -30,3 +33,4 @@ Collate:
     'braidSave.R'
     'plotAppender.R'
     'textAppender.R'
+    'plotRecord.R'

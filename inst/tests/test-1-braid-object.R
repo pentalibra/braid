@@ -76,14 +76,14 @@ test_that("braid plotAppender works", {
       
       braidAppendPlot(b, t1, filename="plot_t1.pdf")
       test <- braidAppendPlot(b)
-      rest <- list(list(plot=t1, filename="plot_t1.pdf", width=4, height=3))
+      rest <- list(list(plotcode=t1, filename="plot_t1.pdf", width=4, height=3))
       expect_equal(test, rest)
       
       braidAppendPlot(b, t2, filename="plot_t2.png")
       test <- braidAppendPlot(b)
       rest <- list(
-          list(plot=t1, filename="plot_t1.pdf", width=4, height=3),
-          list(plot=t2, filename="plot_t2.png", width=4, height=3)
+          list(plotcode=t1, filename="plot_t1.pdf", width=4, height=3),
+          list(plotcode=t2, filename="plot_t2.png", width=4, height=3)
       )
       expect_equal(test, rest)
       expect_is(test, "list")

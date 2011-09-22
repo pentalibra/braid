@@ -62,16 +62,16 @@ braidFilename <- function(b, counter=braidIncCounter(b),
 #' Saves braid plot to pdf.  Uses either ggsave() or pdf(), depending on the class of plot.  Supports plots of class ggsave and trellis (i.e. lattice plots).
 #' 
 #' @param braid A braid object
-#' @param x A plot object
+#' @param plotcode A plot object (either ggplot or lattice)
 #' @param filename Filename without path. The path is obtained from the braid defaults
 #' @param width Width in inches
-#' @param height Heigh in inches
+#' @param height Height in inches
 #' @export
-braidPlot <- function(braid, x, filename=braidFilename(braid), 
+braidPlot <- function(braid, plotcode, filename=braidFilename(braid), 
     width=braid$defaultPlotSize[1], 
     height=braid$defaultPlotSize[2]){
   braidWrite(braid, paste("  \\PlaceGraph{", "graphics", "/", filename, "}", sep=""))
-  braidAppendPlot(braid, x, filename, width, height)
+  braidAppendPlot(braid, plotcode, filename, width, height)
   invisible(NULL)
 }
 

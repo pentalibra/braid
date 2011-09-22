@@ -16,7 +16,7 @@ newPlotAppender <- function() {
     if(!is.null(newPlot)) {
       plots <<- c(plots, 
           list(list(
-              plot=newPlot, 
+              plotcode=newPlot, 
               filename=newFilename, 
               width=width, 
               height=height)

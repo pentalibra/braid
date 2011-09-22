@@ -29,20 +29,20 @@ Create a new braid:
 
 Report writing commands:
 \begin{itemize}
-	\item \code{braid\_heading()}
-	\item \code{braid\_write()}
-	\item \code{braid\_plot()}
+	\item \code{braidHeading()}
+	\item \code{braidWrite()}
+	\item \code{braidPlot()}
 \end{itemize}
 
 Save results to file:
 \begin{itemize}
-	\item \code{braid\_save()}
+	\item \code{braidSave()}
 \end{itemize}
 
 Compile to PDF:
 \begin{itemize}
 	\item \code{braid\_latex\_outline()}
-	\item \code{braid\_compile()}
+	\item \code{braidCompile()}
 \end{itemize}
 	
 
@@ -54,11 +54,11 @@ To use these packages, the user will write markup code with embedded R statement
 
 Braid approaches this problem from the other direction.  In other words, the user always write R code.  The results of this code are then wrapped in Latex statements and saved to a .tex file.
 
-Finally, braid provides a wrapper function around \code{\link{tools::tex2dvi}} that will "compile" the document into PDF.
+Finally, braid provides a wrapper function around \code{\link[tools]{tex2dvi}} that "compiles" the document into PDF.
 
 In principle, the package can be extended to also support compilation to HTML or ODF formats, but at the moment only PDF via Latex is supported.
 
-Why did I call it \braid{}?  Because braiding extends the visual image of weave. R code is braided first into Latex and then to PDF. 
+Why call it \braid{}?  Because braiding extends the visual image of weave. R code is braided first into Latex and then to PDF. 
 
 
 \section{Setting up a braid}
@@ -84,14 +84,14 @@ b <- as.braid(
 
 \section{Create some report output}
 
-Now, lets create some headings, text and graphics to go into the report.
+Next, create some headings, text and graphics to go into the report.
 
 There are three essential report elements in a typical report:
 
 \begin{itemize}
-	\item \code{braid\_heading()}
-	\item \code{braid\_write()}
-	\item \code{braid\_plot()}
+	\item \code{braidHeading()}
+	\item \code{braidWrite()}
+	\item \code{braidPlot()}
 \end{itemize}
 
 
@@ -120,7 +120,7 @@ braid_latex_outline(
 braidCompile(outline_file)
 @
 
-If you have not received any error messages, the pdf output should now be ready to 
+If you have not received any error messages, the pdf output should now be ready to view.
 
 
 \section{Final thoughts}
