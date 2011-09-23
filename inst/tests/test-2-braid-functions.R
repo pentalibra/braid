@@ -81,7 +81,7 @@ test_that("braidPlot saves ggplot", {
 
       braidPlot(b, t, filename)
       test <- braidAppendPlot(b)
-      rest <- list(list(plotcode=t, filename=filename, width=5, height=3))
+      rest <- list(list(plotcode=t, filename=filename, width=5, height=3, Qid=NA))
       expect_equal(test, rest)
       
       braidSave(b)
@@ -113,7 +113,7 @@ test_that("braidPlot saves trellis plot", {
       braidPlot(b, t, filename=filename)
       
       test <- braidAppendPlot(b)
-      rest <- list(list(plotcode=t, filename=filename, width=5, height=3))
+      rest <- list(list(plotcode=t, filename=filename, width=5, height=3, Qid=NA))
       expect_equal(test, rest)
       
       braidSave(b)

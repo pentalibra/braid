@@ -59,31 +59,47 @@ test_that("braid filenames are correct", {
 #------------------------------------------------------------------------------
 
 context("plotAppender")
+b <- as.braid(
+    pathLatex    = latex_path,
+    pathGraphics = graph_path,
+    outputFilename=sinkfile
+)
 
-test_that("braid plotAppender works", {
-      b <- as.braid(
-          pathLatex    = latex_path,
-          pathGraphics = graph_path,
-          outputFilename=sinkfile
-      )
-      
-      require(ggplot2)
-      t1 <- ggplot(mtcars, aes(factor(cyl))) + geom_bar()
-      t2 <- ggplot(mtcars, aes(factor(cyl))) + geom_point()
+require(ggplot2)
+t1 <- ggplot(mtcars, aes(factor(cyl))) + geom_bar()
+t2 <- ggplot(mtcars, aes(factor(cyl))) + geom_point()
+
+test_that("plotAppender returns correct value", {
       
       #browser()
       expect_equal(braidAppendPlot(b), NULL)
       
       braidAppendPlot(b, t1, filename="plot_t1.pdf")
       test <- braidAppendPlot(b)
-      rest <- list(list(plotcode=t1, filename="plot_t1.pdf", width=4, height=3))
+      rest <- list(list(plotcode=t1, filename="plot_t1.pdf", width=4, height=3, Qid=NA))
       expect_equal(test, rest)
-      
-      braidAppendPlot(b, t2, filename="plot_t2.png")
+    })
+
+test_that("plotAppender correctly appends second value", {
+
+      braidAppendPlot(b, t1, filename="plot_t1.pdf", Qid="Test of Qid")
       test <- braidAppendPlot(b)
       rest <- list(
-          list(plotcode=t1, filename="plot_t1.pdf", width=4, height=3),
-          list(plotcode=t2, filename="plot_t2.png", width=4, height=3)
+          list(plotcode=t1, filename="plot_t1.pdf", width=4, height=3, Qid=NA),
+          list(plotcode=t1, filename="plot_t1.pdf", width=4, height=3, Qid="Test of Qid")
+      )
+      expect_equal(test, rest)
+    })
+
+      
+test_that("plotAppender correctly appends third value", {
+      
+      braidAppendPlot(b, t2, filename="plot_t2.png", Qid="Another test")
+      test <- braidAppendPlot(b)
+      rest <- list(
+          list(plotcode=t1, filename="plot_t1.pdf", width=4, height=3, Qid=NA),
+          list(plotcode=t1, filename="plot_t1.pdf", width=4, height=3, Qid="Test of Qid"),
+          list(plotcode=t2, filename="plot_t2.png", width=4, height=3, Qid="Another test")
       )
       expect_equal(test, rest)
       expect_is(test, "list")

@@ -4,6 +4,27 @@
 #----------------------------------------------------------------------------------
 
 
+#' Saves braid plot to pdf.
+#' 
+#' Saves braid plot to pdf.  Uses either ggsave() or pdf(), depending on the class of plot.  Supports plots of class ggsave and trellis (i.e. lattice plots).
+#' 
+#' @param braid A braid object
+#' @param plotcode A plot object (either ggplot or lattice)
+#' @param filename Filename without path. The path is obtained from the braid defaults
+#' @param width Width in inches
+#' @param height Height in inches
+#' @param Qid Optional identifying text that is used to print a message in the event the plot fails
+#' @export
+braidPlot <- function(braid, plotcode, filename=braidFilename(braid), 
+    width=braid$defaultPlotSize[1], 
+    height=braid$defaultPlotSize[2], Qid=NA){
+  braidWrite(braid, paste("  \\PlaceGraph{", "graphics", "/", filename, "}", sep=""))
+  braidAppendPlot(braid, plotcode, filename, width, height, Qid)
+  invisible(NULL)
+}
+
+#------------------------------------------------------------------------------
+
 #' Creates a closure for the temporary storage of braidPlot output.
 #' 
 #' Must be initialised, e.g. braidPlotAppender <- newAppender()
@@ -11,7 +32,7 @@
 #' @keywords internal
 newPlotAppender <- function() {
   plots <- NULL
-  function(newPlot=NULL, newFilename="", width=4, height=3, reset=FALSE) {
+  function(newPlot=NULL, newFilename="", width=4, height=3, Qid=NA, reset=FALSE) {
     if(reset) plots <<- list()
     if(!is.null(newPlot)) {
       plots <<- c(plots, 
@@ -19,7 +40,8 @@ newPlotAppender <- function() {
               plotcode=newPlot, 
               filename=newFilename, 
               width=width, 
-              height=height)
+              height=height,
+              Qid=Qid)
       ))
     }
     invisible(plots)
@@ -32,9 +54,9 @@ newPlotAppender <- function() {
 #' 
 #' The output from braidWrite is stored in a character vector, for later dumping to file.
 #' 
-#' @param braid A braid object
+#' @inheritParams braidPlot
 #' @keywords internal
-braidAppendPlot <- function(braid, plot=NULL, filename="", width=4, height=3, reset=FALSE){
-  eval(braid$plotAppender(plot, filename, width, height, reset), envir=parent.frame(n=1))
+braidAppendPlot <- function(braid, plot=NULL, filename="", width=4, height=3, Qid=NA, reset=FALSE){
+  eval(braid$plotAppender(plot, filename, width, height, Qid, reset), envir=parent.frame(n=1))
 }
 

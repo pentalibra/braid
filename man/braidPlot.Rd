@@ -4,7 +4,7 @@
 \usage{
   braidPlot(braid, plotcode, filename =
   braidFilename(braid), width = braid$defaultPlotSize[1],
-  height = braid$defaultPlotSize[2])
+  height = braid$defaultPlotSize[2], Qid = NA)
 }
 \arguments{
   \item{braid}{A braid object}
@@ -17,6 +17,9 @@
   \item{width}{Width in inches}
 
   \item{height}{Height in inches}
+
+  \item{Qid}{Optional identifying text that is used to
+  print a message in the event the plot fails}
 }
 \description{
   Saves braid plot to pdf.  Uses either ggsave() or pdf(),

@@ -29,19 +29,24 @@ braidSavePlotOne <- function(plotElement, braid){
   filename <- plotElement$filename
   width    <- plotElement$width
   height   <- plotElement$height
+  Qid      <- plotElement$Qid
   
   pEx <- plotExists(braid, plotcode, filename, width, height)
   if(!pEx){
     
     if(inherits(plotcode, "ggplot")){
       require(ggplot2)
-      ggplot2::ggsave(
-          filename = filename, 
-          plot     = plotcode, 
-          width    = width, 
-          height   = height,
-          dpi      = braid$dpi, 
-          path     = braid$pathGraphics
+      errorMessage <- paste("\nError in saving ggplot\nQid = ", Qid, "\nFilename = ", filename, "\n")
+      tryCatch(
+          ggplot2::ggsave(
+              filename = filename, 
+              plot     = plotcode, 
+              width    = width, 
+              height   = height,
+              dpi      = braid$dpi, 
+              path     = braid$pathGraphics
+          ),
+          finally=message(errorMessage)
       )
     } 
     if(inherits(plotcode, "trellis")){

@@ -57,26 +57,6 @@ braidFilename <- function(b, counter=braidIncCounter(b),
 
 #------------------------------------------------------------------------------
 
-#' Saves braid plot to pdf.
-#' 
-#' Saves braid plot to pdf.  Uses either ggsave() or pdf(), depending on the class of plot.  Supports plots of class ggsave and trellis (i.e. lattice plots).
-#' 
-#' @param braid A braid object
-#' @param plotcode A plot object (either ggplot or lattice)
-#' @param filename Filename without path. The path is obtained from the braid defaults
-#' @param width Width in inches
-#' @param height Height in inches
-#' @export
-braidPlot <- function(braid, plotcode, filename=braidFilename(braid), 
-    width=braid$defaultPlotSize[1], 
-    height=braid$defaultPlotSize[2]){
-  braidWrite(braid, paste("  \\PlaceGraph{", "graphics", "/", filename, "}", sep=""))
-  braidAppendPlot(braid, plotcode, filename, width, height)
-  invisible(NULL)
-}
-
-#------------------------------------------------------------------------------
-
 #' Compiles braid latex file to PDF or other output
 #' 
 #' This is a wrapper around \code{\link[tools]{texi2dvi}} to convert a latex file to PDF output.  No other formats are currently supported.
