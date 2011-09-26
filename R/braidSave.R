@@ -37,7 +37,7 @@ braidSavePlotOne <- function(plotElement, braid){
     if(inherits(plotcode, "ggplot")){
       require(ggplot2)
       errorMessage <- paste("\nError in saving ggplot\nQid = ", Qid, "\nFilename = ", filename, "\n")
-      tryCatch(
+      res <- tryCatch(
           ggplot2::ggsave(
               filename = filename, 
               plot     = plotcode, 
@@ -46,8 +46,9 @@ braidSavePlotOne <- function(plotElement, braid){
               dpi      = braid$dpi, 
               path     = braid$pathGraphics
           ),
-          finally=message(errorMessage)
+          error = function(e) e
       )
+      if(inherits(res, "error")) message(paste(errorMessage, "\n", res, "\n"))
     } 
     if(inherits(plotcode, "trellis")){
       require(lattice)
