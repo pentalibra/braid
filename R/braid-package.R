@@ -1,7 +1,7 @@
 # Braid package documentation
 # 
 # Author: Andrie
-###############################################################################
+#------------------------------------------------------------------------------
 
 
 #' A report writing system that creates and compiles LaTEX and pdf output from R.
