@@ -26,7 +26,7 @@
   \item{\code{\link{braidSave}}} }
 
   Compile to PDF: \itemize{
-  \item{\code{\link{braid_latex_outline}}}
+  \item{\code{\link{braidLatexOutline}}}
   \item{\code{\link{braidCompile}}} }
 }
 \author{

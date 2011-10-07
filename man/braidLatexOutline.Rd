@@ -1,8 +1,8 @@
-\name{braid_latex_outline}
-\alias{braid_latex_outline}
+\name{braidLatexOutline}
+\alias{braidLatexOutline}
 \title{Creates latex outline file}
 \usage{
-  braid_latex_outline(outputFilename, content_filename,
+  braidLatexOutline(outputFilename, content_filename,
   title, author)
 }
 \arguments{

@@ -38,7 +38,7 @@ test_that("braidSave works in clean environment", {
       
       plotfile <- file.path(graph_path, "fig0001a.pdf")
       expect_true(file.exists(plotfile))
-      expect_true(file.exists(filenamePlotRecord(b, "fig0001a.pdf")))
+      expect_true(file.exists(filenamePlotCache(b, "fig0001a.pdf")))
     })
 
 
@@ -56,12 +56,12 @@ test_that("braidSave still works when rerun on existing files", {
       
       plotfile <- file.path(graph_path, "fig0001a.pdf")
       expect_true(file.exists(plotfile))
-      expect_true(file.exists(filenamePlotRecord(b, "fig0001a.pdf")))
+      expect_true(file.exists(filenamePlotCache(b, "fig0001a.pdf")))
       
       braidPlot(b, t, filename=filename)
       braidSave(b)
      
       plotfile <- file.path(graph_path, "fig0001a.pdf")
       expect_true(file.exists(plotfile))
-      expect_true(file.exists(filenamePlotRecord(b, "fig0001a.pdf")))
+      expect_true(file.exists(filenamePlotCache(b, "fig0001a.pdf")))
     })

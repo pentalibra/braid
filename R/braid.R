@@ -66,6 +66,8 @@ braidFilename <- function(b, counter=braidIncCounter(b),
 #' @param useXelatex If TRUE, uses xelatex to compile the latex.  If FALSE, uses \code{\link[tools]{texi2dvi}}.  If "guess", it uses a heuristic to see whether xelatex should be used or not: it searches for \code{\\usepackage\{xe*\}} in the latexfile; if found, uses xelatex otherwise texi2dvi.
 #' @export
 braidCompile <- function(latexfile, output="pdf", useXelatex = TRUE)
+# 
+
 {
   old_wd <- getwd()
   setwd(dirname(latexfile))
@@ -82,7 +84,8 @@ braidCompile <- function(latexfile, output="pdf", useXelatex = TRUE)
   message("Starting to compile PDF document")
   if(useXelatex){
     # Compile latex file to PDF using xelatex
-    res <- shell(cmd=paste("xelatex", basename(latexfile)), mustWork=TRUE, intern=TRUE)
+    res <- shell(cmd=paste("xelatex --interaction=batchmode", 
+            basename(latexfile)), mustWork=TRUE, intern=TRUE)
     print(tail(res, 2))
   } else {
     # Compile latex file to PDF using texi2dvi

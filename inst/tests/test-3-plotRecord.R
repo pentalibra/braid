@@ -1,4 +1,4 @@
-0# Tests plotRecord functions
+0# Tests plotCache functions
 # 
 # Author: Andrie
 #----------------------------------------------------------------------------------
@@ -18,7 +18,7 @@ clearFiles <- function(){
 
 #------------------------------------------------------------------------------
 
-context("plotRecord")
+context("plotCache")
 
       
       clearFiles()
@@ -42,56 +42,56 @@ context("plotRecord")
       plot2 <- plotlist[[2]]
       
       
-test_that("plotRecord creates correct file names", { 
-      expect_equal(filenamePlotRecord(b, f1), file.path(b$pathGraphics, "braid_plot_t1.pdf.rds"))
-      expect_equal(filenamePlotRecord(b, f2), file.path(b$pathGraphics, "braid_plot_t2.pdf.rds"))
+test_that("plotCache creates correct file names", { 
+      expect_equal(filenamePlotCache(b, f1), file.path(b$pathGraphics, "braid_plot_t1.pdf.rds"))
+      expect_equal(filenamePlotCache(b, f2), file.path(b$pathGraphics, "braid_plot_t2.pdf.rds"))
     })
 
-test_that("plotRecord correctly determines plot doesn't exist", { 
+test_that("plotCache correctly determines plot doesn't exist", { 
       
       
-      expect_false(plotExists(b, plot1$plotcode, plot1$filename, plot1$width, plot1$height))
-      expect_false(plotExists(b, plot2$plotcode, plot2$filename, plot2$width, plot2$height))
+      expect_false(cacheExists(b, plot1$plotcode, plot1$filename, plot1$width, plot1$height))
+      expect_false(cacheExists(b, plot2$plotcode, plot2$filename, plot2$width, plot2$height))
       braidSave(b)
     })
       
       #print(plotlist)
-test_that("plotRecord correctly determines plot exists", { 
+test_that("plotCache correctly determines plot exists", { 
             
-      savePlotRecord(b, plot1$plotcode, plot1$filename, plot1$width, plot1$height)
-      savePlotRecord(b, plot2$plotcode, plot2$filename, plot2$width, plot2$height)
+      savePlotCache(b, plot1$plotcode, plot1$filename, plot1$width, plot1$height)
+      savePlotCache(b, plot2$plotcode, plot2$filename, plot2$width, plot2$height)
       expect_true(file.exists(file.path(b$pathGraphics, f1)))
       expect_true(file.exists(file.path(b$pathGraphics, f2)))
-      expect_true(plotExists(b, plot1$plotcode, plot1$filename, plot1$width, plot1$height))
-      expect_true(plotExists(b, plot2$plotcode, plot2$filename, plot2$width, plot2$height))
+      expect_true(cacheExists(b, plot1$plotcode, plot1$filename, plot1$width, plot1$height))
+      expect_true(cacheExists(b, plot2$plotcode, plot2$filename, plot2$width, plot2$height))
       
     })
 
-test_that("plotRecord does something else", {
+test_that("plotCache does something else", {
       
-      pRec <- readPlotRecord(b, plot1$filename)
+      pRec <- readPlotCache(b, plot1$filename)
       expect_equal(pRec$plotcode, plot1$plotcode)
       expect_equal(pRec$filename, plot1$filename)
       expect_equal(pRec$width, 5)
       expect_equal(pRec$height, 3)
       expect_equal(pRec$md5sum, tools::md5sum(file.path(b$pathGraphics, plot1$filename)))
-      expect_is(pRec, "braidPlotRecord")
+      expect_is(pRec, "braidPlotCache")
     })
 
-test_that("plotRecord individual tests are correct", {
-      pRec <- readPlotRecord(b, plot1$filename)
+test_that("plotCache individual tests are correct", {
+      pRec <- readPlotCache(b, plot1$filename)
       expect_equal(pRec, 
-              plotRecord(
+              plotCache(
                   b,
                   plot1$plotcode, 
                   plot1$filename, 
                   plot1$width, 
                   plot1$height
                   ))
-      expect_true(plotExists(b, plot1$plotcode, plot1$filename, plot1$width, plot1$height))
+      expect_true(cacheExists(b, plot1$plotcode, plot1$filename, plot1$width, plot1$height))
       
-      savePlotRecord(b, plot2$plotcode, plot2$filename, plot2$width, plot2$height)
-      expect_true(plotExists(b, plot2$plotcode, plot2$filename, plot2$width, plot2$height))
+      savePlotCache(b, plot2$plotcode, plot2$filename, plot2$width, plot2$height)
+      expect_true(cacheExists(b, plot2$plotcode, plot2$filename, plot2$width, plot2$height))
       
     })
 

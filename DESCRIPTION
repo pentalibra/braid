@@ -27,10 +27,10 @@ Suggests:
 Collate:
     'braid-package.R'
     'braid.R'
-    'latex-outline.R'
     'latex.R'
     'braid-object.R'
     'braidSave.R'
     'plotAppender.R'
     'textAppender.R'
-    'plotRecord.R'
+    'plotCache.R'
+    'latexOutline.R'

@@ -34,7 +34,7 @@ if (file.exists(file.path(latex_path, pdf_file))){
 
 
 test_that("braid_outline is created", {
-      braid_latex_outline(
+      braidLatexOutline(
           #pathLatex=latex_path, 
           outputFilename=outline_file,
           content_filename=content_file,

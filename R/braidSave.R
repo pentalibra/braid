@@ -31,13 +31,13 @@ braidSavePlotOne <- function(plotElement, braid){
   height   <- plotElement$height
   Qid      <- plotElement$Qid
   
-  pEx <- plotExists(braid, plotcode, filename, width, height)
+  pEx <- cacheExists(braid, plotcode, filename, width, height)
   if(!pEx){
     
     if(inherits(plotcode, "ggplot")){
       require(ggplot2)
       errorMessage <- paste("\nError in saving ggplot\nQid = ", Qid, "\nFilename = ", filename, "\n")
-      res <- tryCatch(
+      res <- tryCatch({
           ggplot2::ggsave(
               filename = filename, 
               plot     = plotcode, 
@@ -45,7 +45,9 @@ braidSavePlotOne <- function(plotElement, braid){
               height   = height,
               dpi      = braid$dpi, 
               path     = braid$pathGraphics
-          ),
+          )
+          savePlotCache(braid, plotcode, filename, width, height)
+          },
           error = function(e) e
       )
       if(inherits(res, "error")) message(paste(errorMessage, "\n", res, "\n"))
@@ -53,14 +55,20 @@ braidSavePlotOne <- function(plotElement, braid){
     if(inherits(plotcode, "trellis")){
       require(lattice)
       on.exit(dev.off())
-      pdf(
-          file=file.path(braid$pathGraphics, filename),
-          width    = width, 
-          height   = height
+      errorMessage <- paste("\nError in saving ggplot\nQid = ", Qid, "\nFilename = ", filename, "\n")
+      res <- tryCatch({
+          pdf(
+            file=file.path(braid$pathGraphics, filename),
+            width    = width, 
+            height   = height
+          )
+          print(plotcode)
+          savePlotCache(braid, plotcode, filename, width, height)
+        },
+        error = function(e) e
       )
-      print(plotcode)
+      if(inherits(res, "error")) message(paste(errorMessage, "\n", res, "\n"))
     } 
-    savePlotRecord(braid, plotcode, filename, width, height)
   }
   ret <- file.exists(file.path(braid$pathGraphics, filename))
 #  if(ret) message(paste("Saved", filename))

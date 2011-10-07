@@ -24,12 +24,15 @@
 #' @param title Document title.  You can use valid latex, including newline \\ - remember to use escape sequences
 #' @param author Document author.  You can use valid latex.
 #' @export
-braid_latex_outline <- function(outputFilename, content_filename, title, author){
+braidLatexOutline <- function(outputFilename, content_filename, title, author){
   ret <- paste("
   \\documentclass[a4paper, 10pt]{report}
   
   \\usepackage[portrait, hmargin=2cm, top=2cm, bottom=2cm]{geometry}
   \\renewcommand{\\familydefault}{\\sfdefault}  %specify sans serif font
+
+  \\usepackage{fontspec}
+  \\setmainfont{Arial Unicode MS}
       
   \\usepackage{fancyhdr}
   \\pagestyle{fancy}
@@ -46,7 +49,7 @@ braid_latex_outline <- function(outputFilename, content_filename, title, author)
   \\usepackage{datetime}
   
   \\usepackage[bookmarks=true, breaklinks=true]{hyperref} %create bookmarks - must be last package in list
-  \n")
+  ")
   
   ret <- paste(ret, "\\title{", title, "}\n")
   ret <- paste(ret, "\\author{", author, "}\n")
