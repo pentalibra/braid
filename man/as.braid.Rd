@@ -2,24 +2,26 @@
 \alias{as.braid}
 \title{Creates object of class braid.}
 \usage{
-  as.braid(pathLatex = Sys.getenv()["TEMP"], pathGraphics =
-  pathLatex, outputFilename = file.path(pathLatex,
-  "braid.tex"), counterStart = 1, defaultPlotSize = c(5,
-  3), dpi = 600)
+  as.braid(path = Sys.getenv()["TEMP"], graphics =
+  "graphics", file = "braid.tex", counterStart = 1,
+  defaultPlotSize = c(5, 3), dpi = 600)
 }
 \arguments{
-  \item{pathLatex}{Path where latex will be saved}
+  \item{path}{Character vector: File path where latex
+  output will be saved}
 
-  \item{pathGraphics}{Path where graphics files will be
-  saved}
+  \item{graphics}{Character vector: File path relative to
+  \code{pathOutput} where to save graphics (this gets
+  appended to pathOutput.)}
 
-  \item{outputFilename}{Filename where latex output will be
-  saved}
+  \item{file}{Filename where latex output will be saved
+  (This gets appended to \code{pathOutput})}
 
   \item{counterStart}{The starting number for a counter
-  used to store graphs,}
+  used to store graphs, defaults to 1}
 
-  \item{defaultPlotSize}{Plot size in inches, e.g. c(4, 3)}
+  \item{defaultPlotSize}{Numeric vector of length 2: Plot
+  size in inches, e.g. c(4, 3)}
 
   \item{dpi}{Dots per inch, passed to ggsave()}
 }

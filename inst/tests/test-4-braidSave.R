@@ -22,11 +22,7 @@ context("braidSave")
 
 test_that("braidSave works in clean environment", {
       clearFiles()
-      b <- as.braid(
-          pathLatex    = latex_path,
-          pathGraphics = graph_path,
-          outputFilename=sinkfile
-      )
+      b <- as.braid(path=latex_path, file="braid_test.tex")
       
       filename <- braidFilename(b, counter=1, prefix="fig", suffix="a", ext=".pdf")
       
@@ -43,11 +39,7 @@ test_that("braidSave works in clean environment", {
 
 
 test_that("braidSave still works when rerun on existing files", {
-      b <- as.braid(
-          pathLatex    = latex_path,
-          pathGraphics = graph_path,
-          outputFilename=sinkfile
-      )
+      b <- as.braid(path=latex_path, file="braid_test.tex")
       
       filename <- braidFilename(b, counter=1, prefix="fig", suffix="a", ext=".pdf")
       

@@ -40,15 +40,11 @@ test_that("braid_outline is created", {
           content_filename=content_file,
           title="Test",
           author="I am the author")
-      expect_that(file.exists(outline_file), is_true())
+      expect_true(file.exists(outline_file))
     })
 
 test_that("braid file gets compiled",{
-      b <- as.braid(
-          pathLatex    = latex_path,
-          pathGraphics = graph_path,
-          outputFilename=file.path(latex_path, content_file)
-      )
+      b <- as.braid(path=latex_path, file="braid_test.tex")
       braidHeading(b, "This is a test")
       braidWrite(b, "This should be a normal paragraph.")
       braidWrite(b, "And another")

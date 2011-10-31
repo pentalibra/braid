@@ -33,6 +33,7 @@
 #' @name package-braid
 #' @aliases braid package-braid
 #' @docType package
+#' @import plyr Hmisc xtable tools
 #' @title Tools for reporting on survey objects.
 #' @author Andrie de Vries \email{andrie.de.vries@@pentalibra.com}
 #' @keywords package

@@ -19,7 +19,7 @@
 #'  - Contain all the document pre-amble
 #'  - In the main body section, have a \\input{} line that calls the braid content file.
 #' 
-#' @param outputFilename The file name to use when writing the outline to disk
+#' @param outputFilename The full file path and name to use when writing the outline to disk
 #' @param content_filename The name of the braid content file (this is embedded in the outline file using a \\input{} statement in Latex
 #' @param title Document title.  You can use valid latex, including newline \\ - remember to use escape sequences
 #' @param author Document author.  You can use valid latex.
@@ -85,9 +85,9 @@ braidLatexOutline <- function(outputFilename, content_filename, title, author){
   ### Now prepare file
   
   r_braid <- as.braid(
-      pathLatex = dirname(outputFilename), 
+      path = dirname(outputFilename), 
       #outputFilename=file.path(pathLatex, outputFilename)
-      outputFilename=outputFilename
+      file = basename(outputFilename)
   )
   braidWrite(r_braid, ret)
   braidSave(r_braid)
