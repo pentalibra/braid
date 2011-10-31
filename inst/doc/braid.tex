@@ -42,7 +42,7 @@ Save results to file:
 
 Compile to PDF:
 \begin{itemize}
-	\item \code{braid\_latex\_outline()}
+	\item \code{braidLatexOutline()}
 	\item \code{braidCompile()}
 \end{itemize}
 	
@@ -69,15 +69,11 @@ First, set up a braid object.  The following code sets up a braid object.  A bra
 \begin{Schunk}
 \begin{Sinput}
 > library(braid)
-> path <- file.path("f:", "git", "braid", "test")
-> latex_path <- file.path(path, "latex")
-> graph_path <- file.path(latex_path, "graphics")
-> sinkfile <- file.path(latex_path, "braid_test.tex")
-> outline_file <- file.path(latex_path, "Outline.tex")
+> path <- file.path("f:", "git", "braid", "test", "latex")
+> outline_file <- file.path(path, "Outline.tex")
 > content_file <- "Content.tex"
 > pdf_file <- "Outline.pdf"
-> b <- as.braid(pathLatex = latex_path, pathGraphics = graph_path, 
-+     outputFilename = file.path(latex_path, content_file))
+> b <- as.braid(path = path, file = content_file)
 \end{Sinput}
 \end{Schunk}
 
@@ -112,10 +108,14 @@ To save and compile:
 \begin{Schunk}
 \begin{Sinput}
 > braidSave(b)
-> braid_latex_outline(outputFilename = outline_file, content_filename = content_file, 
+> braidLatexOutline(outputFilename = outline_file, content_filename = content_file, 
 +     title = "Test", author = "I am the author")
 > braidCompile(outline_file)
 \end{Sinput}
+\begin{Soutput}
+[1] "This is XeTeX, Version 3.1415926-2.3-0.9997.5 (MiKTeX 2.9)"
+[2] "entering extended mode"                                    
+\end{Soutput}
 \end{Schunk}
 
 If you have not received any error messages, the pdf output should now be ready to view.

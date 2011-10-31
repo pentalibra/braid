@@ -41,7 +41,7 @@ Save results to file:
 
 Compile to PDF:
 \begin{itemize}
-	\item \code{braid\_latex\_outline()}
+	\item \code{braidLatexOutline()}
 	\item \code{braidCompile()}
 \end{itemize}
 	
@@ -67,19 +67,13 @@ First, set up a braid object.  The following code sets up a braid object.  A bra
 
 <<echo=TRUE>>=
 library(braid)
-path <- file.path("f:", "git", "braid", "test")
-latex_path <- file.path(path, "latex")
-graph_path <- file.path(latex_path, "graphics")
-sinkfile   <- file.path(latex_path, "braid_test.tex")
-outline_file <- file.path(latex_path, "Outline.tex")
+path <- file.path("f:", "git", "braid", "test", "latex")
+
+outline_file <- file.path(path, "Outline.tex")
 content_file <- "Content.tex"
 pdf_file <- "Outline.pdf"
 
-b <- as.braid(
-    pathLatex    = latex_path, 
-    pathGraphics = graph_path,
-    outputFilename=file.path(latex_path, content_file)
-)
+b <- as.braid(path = path, file = content_file)
 @
 
 \section{Create some report output}
@@ -112,7 +106,7 @@ To save and compile:
 
 <<echo=TRUE>>=
 braidSave(b)
-braid_latex_outline(
+braidLatexOutline(
     outputFilename=outline_file,
     content_filename=content_file,
     title="Test",
