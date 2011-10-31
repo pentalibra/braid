@@ -12,10 +12,10 @@ Description: This package tries to solve the problem of
     creation of PDF files via LaTEX only.
 Author@R: person("Andrie", "de Vries",
     email="apdevries@gmail.com")
-Version: 0.1-00
-URL:
-Date: 2011-09-21
-Depends:
+Version: 0.1-03
+URL: https://github.com/pentalibra/braid
+Date: 2011-10-31
+Imports:
     plyr,
     Hmisc,
     xtable,

@@ -1,3 +1,10 @@
+braid 0.1-03
+------------
+
+IMPROVEMENTS
+* Simplified file and path arguments to as.braid: file now only takes filename, not path
+* Now imports packages, rather than declaring dependency 
+
 braid 0.0-09
 ------------
 
