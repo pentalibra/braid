@@ -35,5 +35,4 @@
   This code is copied from Hmisc.  Hmisc used to export
   this function.
 }
-\keyword{Internal}
 

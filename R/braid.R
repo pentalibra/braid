@@ -61,20 +61,20 @@ braidFilename <- function(b, counter=braidIncCounter(b),
 #' 
 #' This is a wrapper around \code{\link[tools]{texi2dvi}} to convert a latex file to PDF output.  No other formats are currently supported.
 #' 
-#' @param latexfile File location of a latex file
+#' @param b A braid object
+#' @param fileOuter File location of a latex file
 #' @param output Determines what type of output to produce.  Default to "pdf", currently the only supported format
-#' @param useXelatex If TRUE, uses xelatex to compile the latex.  If FALSE, uses \code{\link[tools]{texi2dvi}}.  If "guess", it uses a heuristic to see whether xelatex should be used or not: it searches for \code{\\usepackage\{xe*\}} in the latexfile; if found, uses xelatex otherwise texi2dvi.
+#' @param useXelatex If TRUE, uses \code{xelatex} to compile the latex.  If FALSE, uses \code{\link[tools]{texi2dvi}}.  If "guess", it uses a heuristic to see whether \code{xelatex} should be used or not: it searches for \code{\\usepackage\{xe*\}} in the latexfile; if found, uses \code{xelatex} otherwise texi2dvi.
 #' @export
-braidCompile <- function(latexfile, output="pdf", useXelatex = TRUE)
-# 
-
-{
+braidCompile <- function(b, fileOuter=b$fileOuter, output="pdf", useXelatex = TRUE){
+  # Determine whether file exists
+  if(!file.exists(fileOuter)) stop(paste("In braidCompile: file doesn't exist:", fileOuter))
   old_wd <- getwd()
-  setwd(dirname(latexfile))
+  setwd(dirname(fileOuter))
   on.exit(setwd(old_wd))
   # Determine whether to use xelatex
   if(useXelatex == "guess"){
-    zz <- scan(latexfile, what="character")
+    zz <- scan(fileOuter, what="character")
     g1 <- grep("\\usepackage\\{xe.*?\\}", zz)
     g2 <- grep("^%", zz)
     useXelatex <- length(setdiff(g1, g2)) > 0
@@ -83,17 +83,19 @@ braidCompile <- function(latexfile, output="pdf", useXelatex = TRUE)
   if(output!="pdf") stop(paste("In braidCompile: Output format", output, "not supported"))
   message("Starting to compile PDF document")
   if(useXelatex){
+    # Checks that xelatex is installed
+    if(as.logical(Sys.which("xelatex")=="")) stop("braidCompile: xelatex is not installed")
     # Compile latex file to PDF using xelatex
     res <- shell(cmd=paste("xelatex --interaction=batchmode", 
-            basename(latexfile)), mustWork=TRUE, intern=TRUE)
+            basename(fileOuter)), mustWork=TRUE, intern=TRUE)
     print(tail(res, 2))
   } else {
     # Compile latex file to PDF using texi2dvi
-    suppressWarnings(tools::texi2dvi(latexfile, pdf=TRUE, clean=FALSE))
-    suppressWarnings(tools::texi2dvi(latexfile, pdf=TRUE, clean=TRUE))
+    suppressWarnings(tools::texi2dvi(fileOuter, pdf=TRUE, clean=FALSE))
+    suppressWarnings(tools::texi2dvi(fileOuter, pdf=TRUE, clean=TRUE))
   }
   message("All done.  Your file should now be ready:")
-  message(paste(sub(".tex$", ".pdf", latexfile), "\n"))
+  message(paste(sub(".tex$", ".pdf", fileOuter), "\n"))
   invisible(NULL)
 }
 

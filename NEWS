@@ -1,3 +1,8 @@
+braid 0.1-04 (1/11/2011)
+------------
+IMPROVEMENTS
+* braidCompile and braidLatexOutline now takes braid object as argument and automatically determines location of file to compile
+
 braid 0.1-03
 ------------
 

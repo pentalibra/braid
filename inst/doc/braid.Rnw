@@ -69,11 +69,11 @@ First, set up a braid object.  The following code sets up a braid object.  A bra
 library(braid)
 path <- file.path("f:", "git", "braid", "test", "latex")
 
-outline_file <- file.path(path, "Outline.tex")
-content_file <- "Content.tex"
-pdf_file <- "Outline.pdf"
+outlineFile <- file.path(path, "Outline.tex")
+contentFile <- "Content.tex"
+pdfFile <- "Outline.pdf"
 
-b <- as.braid(path = path, file = content_file)
+b <- as.braid(path = path, fileOuter=outlineFile, fileInner = contentFile)
 @
 
 \section{Create some report output}
@@ -106,12 +106,10 @@ To save and compile:
 
 <<echo=TRUE>>=
 braidSave(b)
-braidLatexOutline(
-    outputFilename=outline_file,
-    content_filename=content_file,
+braidLatexOutline(b,
     title="Test",
     author="I am the author")
-braidCompile(outline_file)
+braidCompile(b)
 @
 
 If you have not received any error messages, the pdf output should now be ready to view.

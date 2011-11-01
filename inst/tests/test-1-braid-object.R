@@ -13,12 +13,26 @@ if (file.exists(file.path(latex_path, sinkfile))){
   file.remove(file.path(latex_path, sinkfile))
 }
 
+
+#------------------------------------------------------------------------------
+
+context("Test as.braid")
+
+test_that("as.braid sets up correct file names", {
+      b <- as.braid(path=path)
+      expect_equal(b$pathLatex, path)
+      expect_equal(b$fileOuter, file.path(path, "outline.tex"))
+      expect_equal(b$fileInner, file.path(path, "braid.tex"))
+    })
+
+
+
 #------------------------------------------------------------------------------
 
 context("Test braid appender")
 
 test_that("braid counter incrementing works", {
-      b <- as.braid(path=latex_path, file="braid_test.tex")
+      b <- as.braid(path=latex_path, fileInner="braid_test.tex")
       expect_that(braidAppendText(b, "a"), equals("a"))
       expect_that(braidAppendText(b, "b"), equals("ab"))
       expect_that(braidAppendText(b, "c"), equals("abc"))
@@ -29,14 +43,14 @@ test_that("braid counter incrementing works", {
 context("braidCounter and file naming")
 
 test_that("braid counter incrementing works", {
-      b <- as.braid(path=latex_path, file="braid_test.tex")
+      b <- as.braid(path=latex_path, fileInner="braid_test.tex")
       expect_that(braidIncCounter(b), equals(1))
       expect_that(braidIncCounter(b), equals(2))
       expect_that(braidIncCounter(b), equals(3))
     })
 
 test_that("braid filenames are correct", {
-      b <- as.braid(path=latex_path, file="braid_test.tex")
+      b <- as.braid(path=latex_path, fileInner="braid_test.tex")
       expect_that(braidFilename(b), equals("fig0001.pdf"))
       fn <- braidFilename(b, prefix="Gr", suffix="_x", ext=".png")
       #print(fn)
@@ -47,7 +61,7 @@ test_that("braid filenames are correct", {
 #------------------------------------------------------------------------------
 
 context("plotAppender")
-b <- as.braid(path=latex_path, file="braid_test.tex")
+b <- as.braid(path=latex_path, fileInner="braid_test.tex")
 
 require(ggplot2)
 t1 <- ggplot(mtcars, aes(factor(cyl))) + geom_bar()

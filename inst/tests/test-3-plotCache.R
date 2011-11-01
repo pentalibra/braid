@@ -22,7 +22,7 @@ context("plotCache")
 
       
       clearFiles()
-      b <- as.braid(path=latex_path, file="braid_test.tex")
+      b <- as.braid(path=latex_path, fileInner="braid_test.tex")
       
       Depth <- lattice::equal.count(quakes$depth, number=8, overlap=.1)
       t1 <- lattice::xyplot(lat ~ long | Depth, data = quakes)

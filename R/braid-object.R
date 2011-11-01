@@ -10,7 +10,8 @@
 #' 
 #' @param path Character vector: File path where latex output will be saved
 #' @param graphics Character vector: File path relative to \code{pathOutput} where to save graphics (this gets appended to pathOutput.)
-#' @param file Filename where latex output will be saved (This gets appended to \code{pathOutput})
+#' @param fileOuter Filename of latex outline file (used by \code{\link{braidCompile}}
+#' @param fileInner Filename where latex output will be saved (This gets appended to \code{pathOutput})
 #' @param counterStart The starting number for a counter used to store graphs, defaults to 1
 #' @param defaultPlotSize Numeric vector of length 2: Plot size in inches, e.g. c(4, 3)
 #' @param dpi Dots per inch, passed to ggsave()
@@ -19,7 +20,8 @@
 as.braid <- function(
     path = Sys.getenv()["TEMP"],
     graphics = "graphics",
-    file = "braid.tex",
+    fileOuter = "outline.tex",
+    fileInner = "braid.tex",
     counterStart = 1,
     defaultPlotSize = c(5,3),
     dpi = 600
@@ -35,15 +37,17 @@ as.braid <- function(
   if (!file_test("-d", graphics)){
     stop(paste("The graphics file path doesn't exist:", path))
   }
-  file <- file.path(path, file)
-  if(file.exists(file)) file.remove(file)
-  file.create(file)
+  fileOuter <- file.path(path, basename(fileOuter))
+  fileInner <- file.path(path, basename(fileInner))
+  if(file.exists(fileInner)) file.remove(fileInner)
+  file.create(fileInner)
   
   structure(
       list(
           pathLatex           = path,
           pathGraphics        = graphics,
-          outputFilename      = file,
+          fileOuter           = fileOuter,
+          fileInner           = fileInner,
           defaultPlotSize     = defaultPlotSize,
           dpi                 = dpi,
           counter             = newCounter(counterStart) ,

@@ -1,0 +1,53 @@
+
+  \documentclass[a4paper, 10pt]{report}
+  
+  \usepackage[portrait, hmargin=2cm, top=2cm, bottom=2cm]{geometry}
+  \renewcommand{\familydefault}{\sfdefault}  %specify sans serif font
+
+  \usepackage{fontspec}
+  \setmainfont{Arial Unicode MS}
+      
+  \usepackage{fancyhdr}
+  \pagestyle{fancy}
+  \lhead{} %Sets top left header to nothing
+      
+  \usepackage{placeins}
+  \usepackage{caption} %for non-floating figures
+  \usepackage{array} %extends functionality and formatting of tabular environment
+  \usepackage{rotating} %for vertical orientation of labels in tabular environments
+  \usepackage{graphicx} %to include .png graphics
+  \usepackage{float} %to force floats to appear HERE [H]
+      %package float:  http://www.tex.ac.uk/tex-archive/macros/latex/contrib/float/
+  \DeclareGraphicsExtensions{.pdf, .eps, .png, .jpg}
+  \usepackage{datetime}
+  
+  \usepackage[bookmarks=true, breaklinks=true]{hyperref} %create bookmarks - must be last package in list
+   \title{ Test }
+ \author{ I am the author }
+ \date{\today \\ \currenttime}
+
+ \newcommand\PlaceGraph[1]
+  {
+    \begin{center}
+    \begin{figure}[H]
+    \includegraphics{#1}
+      \end{figure}
+      \end{center}
+    }
+
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+     % Begin document
+     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+     \begin{document}
+
+    \maketitle
+    \setcounter{secnumdepth}{-1} % specify heading numbering depth
+        \tableofcontents
+    \clearpage
+    
+    %%% This is where the actual content goes
+
+ \input{ Content.tex }
+
+ \end{document}
+

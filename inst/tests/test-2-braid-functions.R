@@ -25,7 +25,7 @@ context("braidWrite")
 test_that("braidWrite appends output to file", {
 
     clearFiles()
-    b <- as.braid(path=latex_path, file="braid_test.tex")
+    b <- as.braid(path=latex_path, fileInner="braid_test.tex")
     
     x <- braidWrite(b, "Test output")
     braidSave(b)
@@ -46,7 +46,7 @@ context("braidHeading")
 test_that("braidHeading writes correct output to file",{
       
       clearFiles()
-      b <- as.braid(path=latex_path, file="braid_test.tex")
+      b <- as.braid(path=latex_path, fileInner="braid_test.tex")
       
       braidHeading(b, "Heading level 1")
       braidSave(b)
@@ -60,7 +60,7 @@ context("braidPlot - ggplot")
 
 test_that("braidPlot saves ggplot", {
       clearFiles()
-      b <- as.braid(path=latex_path, file="braid_test.tex")
+      b <- as.braid(path=latex_path, fileInner="braid_test.tex")
       filename <- braidFilename(b, counter=1, prefix="fig", suffix="a", ext=".pdf")
       expect_equal(braidAppendPlot(b), NULL)
       
@@ -87,7 +87,7 @@ context("braidPlot - trellis")
 
 test_that("braidPlot saves trellis plot", {
       clearFiles()
-      b <- as.braid(path=latex_path, file="braid_test.tex")
+      b <- as.braid(path=latex_path, fileInner="braid_test.tex")
       filename <- braidFilename(b, counter=1, prefix="fig", suffix="a", ext=".pdf")
       
       Depth <- lattice::equal.count(quakes$depth, number=8, overlap=.1)

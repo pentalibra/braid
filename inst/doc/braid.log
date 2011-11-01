@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2011.9.28)  31 OCT 2011 14:02
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2011.9.28)  1 NOV 2011 16:33
 entering extended mode
 **f:/git/braid/braid/inst/doc/./braid.tex
 (f:/git/braid/braid/inst/doc/./braid.tex
@@ -248,7 +248,7 @@ Here is how much of TeX's memory you used:
  5644 multiletter control sequences out of 15000+200000
  22268 words of font info for 54 fonts, out of 3000000 for 9000
  715 hyphenation exceptions out of 8191
- 35i,6n,21p,318b,279s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 35i,6n,21p,318b,280s stack positions out of 5000i,500n,10000p,200000b,50000s
  <C:\Users\Andrie\AppData\Local\MiKTeX
 \2.9\fonts\pk\ljfour\jknappen\ec\dpi600\tcst1000.pk> <C:\Users\Andrie\AppData\L
 ocal\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\tcrm1000.pk><C:/Program File
@@ -259,7 +259,7 @@ MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Program Files (x86)/MiK
 TeX 2.9/fonts/type1/public/amsfonts/cm/cmsltt10.pfb><C:/Program Files (x86)/MiK
 TeX 2.9/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Program Files (x86)/MiKTe
 X 2.9/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on braid.pdf (3 pages, 96969 bytes).
+Output written on braid.pdf (3 pages, 97054 bytes).
 PDF statistics:
  50 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

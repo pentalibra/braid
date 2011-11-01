@@ -19,12 +19,14 @@
 #'  - Contain all the document pre-amble
 #'  - In the main body section, have a \\input{} line that calls the braid content file.
 #' 
-#' @param outputFilename The full file path and name to use when writing the outline to disk
-#' @param content_filename The name of the braid content file (this is embedded in the outline file using a \\input{} statement in Latex
+#' @param b braid object
+#' @param fileOuter The full file path and name to use when writing the outline to disk
+#' @param fileInner The name of the braid content file (this is embedded in the outline file using a \\input{} statement in Latex
 #' @param title Document title.  You can use valid latex, including newline \\ - remember to use escape sequences
 #' @param author Document author.  You can use valid latex.
 #' @export
-braidLatexOutline <- function(outputFilename, content_filename, title, author){
+braidLatexOutline <- function(b, fileOuter=b$fileOuter, fileInner=b$fileInner, title, author){
+  if(!inherits(b, "braid")) stop("braidLatexOutline: argument b must be a braid object")
   ret <- paste("
   \\documentclass[a4paper, 10pt]{report}
   
@@ -78,19 +80,26 @@ braidLatexOutline <- function(outputFilename, content_filename, title, author){
     
     %%% This is where the actual content goes\n\n")
 
-  ret <- paste(ret, "\\input{", content_filename, "}\n\n")
+  ret <- paste(ret, "\\input{", fileInner, "}\n\n")
     
   ret <- paste(ret, "\\end{document}\n")
   
   ### Now prepare file
+#  r_braid <- as.braid(
+#    path = b$path, 
+#    fileOuter = fileOuter,
+#    fileInner = fileOuter # Yes this is correct
+#  )
+#  braidWrite(r_braid, ret)
+#  braidSave(r_braid)
+
+  if(file.exists(fileOuter)) file.remove(fileOuter)
+  file.create(fileOuter)
   
-  r_braid <- as.braid(
-      path = dirname(outputFilename), 
-      #outputFilename=file.path(pathLatex, outputFilename)
-      file = basename(outputFilename)
-  )
-  braidWrite(r_braid, ret)
-  braidSave(r_braid)
+  sfile <- file(fileOuter, "wt")  ### Open file in append mode
+  on.exit(close(sfile))
+  cat(ret, file=sfile)
+
   message("Latex outline file created")
   invisible(NULL)
 }

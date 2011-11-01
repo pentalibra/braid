@@ -12,7 +12,7 @@
 #' @export
 braidSave <- function(braid){
   text <- braidAppendText(braid)
-  sfile <- file(braid$outputFilename, "at")  ### Open file in append mode
+  sfile <- file(braid$fileInner, "at")  ### Open file in append mode
   on.exit(close(sfile))
   cat(text, file=sfile, append=TRUE)
   braidAppendText(braid, reset=TRUE)
@@ -21,6 +21,18 @@ braidSave <- function(braid){
   braidAppendPlot(braid, reset=TRUE)
   invisible(NULL)
 }
+
+savePlot.ggplot <- function(){
+}
+
+
+fileExtension <- function(x){
+  sub("^.*\\.(.{3})$", "\\1", x)
+}
+
+savePlot.lattice <- function(){
+}
+  
 
 #------------------------------------------------------------------------------
 
@@ -34,41 +46,50 @@ braidSavePlotOne <- function(plotElement, braid){
   pEx <- cacheExists(braid, plotcode, filename, width, height)
   if(!pEx){
     
-    if(inherits(plotcode, "ggplot")){
+    if(inherits(plotcode, "ggplot")){ 
+      #savePlot.ggplot()
       require(ggplot2)
       errorMessage <- paste("\nError in saving ggplot\nQid = ", Qid, "\nFilename = ", filename, "\n")
       res <- tryCatch({
-          ggplot2::ggsave(
-              filename = filename, 
-              plot     = plotcode, 
-              width    = width, 
-              height   = height,
-              dpi      = braid$dpi, 
-              path     = braid$pathGraphics
-          )
-          savePlotCache(braid, plotcode, filename, width, height)
+            ggplot2::ggsave(
+                filename = filename, 
+                plot     = plotcode, 
+                width    = width, 
+                height   = height,
+                dpi      = braid$dpi, 
+                path     = braid$pathGraphics
+            )
+            savePlotCache(braid, plotcode, filename, width, height)
           },
           error = function(e) e
       )
       if(inherits(res, "error")) message(paste(errorMessage, "\n", res, "\n"))
     } 
     if(inherits(plotcode, "trellis")){
+      #savePlot.lattice()
       require(lattice)
       on.exit(dev.off())
-      errorMessage <- paste("\nError in saving ggplot\nQid = ", Qid, "\nFilename = ", filename, "\n")
+      errorMessage <- paste("\nError in saving lattice\nQid = ", Qid, "\nFilename = ", filename, "\n")
       res <- tryCatch({
-          pdf(
-            file=file.path(braid$pathGraphics, filename),
-            width    = width, 
-            height   = height
-          )
-          print(plotcode)
-          savePlotCache(braid, plotcode, filename, width, height)
-        },
-        error = function(e) e
+            switch(fileExtension(filename),
+                pdf=pdf(
+                    file=file.path(braid$pathGraphics, filename),
+                    width    = width, 
+                    height   = height
+                ),
+                wmf=win.metafile(
+                    file=file.path(braid$pathGraphics, filename),
+                    width    = width, 
+                    height   = height
+                )
+            )
+            print(plotcode)
+            savePlotCache(braid, plotcode, filename, width, height)
+          },
+          error = function(e) e
       )
       if(inherits(res, "error")) message(paste(errorMessage, "\n", res, "\n"))
-    } 
+    }
   }
   ret <- file.exists(file.path(braid$pathGraphics, filename))
 #  if(ret) message(paste("Saved", filename))

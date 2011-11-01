@@ -3,8 +3,9 @@
 \title{Creates object of class braid.}
 \usage{
   as.braid(path = Sys.getenv()["TEMP"], graphics =
-  "graphics", file = "braid.tex", counterStart = 1,
-  defaultPlotSize = c(5, 3), dpi = 600)
+  "graphics", fileOuter = "outline.tex", fileInner =
+  "braid.tex", counterStart = 1, defaultPlotSize = c(5, 3),
+  dpi = 600)
 }
 \arguments{
   \item{path}{Character vector: File path where latex
@@ -14,8 +15,11 @@
   \code{pathOutput} where to save graphics (this gets
   appended to pathOutput.)}
 
-  \item{file}{Filename where latex output will be saved
-  (This gets appended to \code{pathOutput})}
+  \item{fileOuter}{Filename of latex outline file (used by
+  \code{\link{braidCompile}}}
+
+  \item{fileInner}{Filename where latex output will be
+  saved (This gets appended to \code{pathOutput})}
 
   \item{counterStart}{The starting number for a counter
   used to store graphs, defaults to 1}

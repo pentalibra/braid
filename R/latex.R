@@ -9,8 +9,8 @@
 #' @param out specify additional translated strings over the usual defaults 
 #' @param pb If pb=TRUE, latexTranslate also translates [()] to math mode using \\left, \\right.
 #' @param greek set to TRUE to have latexTranslate put names for greek letters in math mode and add backslashes
-#' @param ... ignored 
-#' @keywords Internal
+#' @param ... ignored
+#' @export 
 latexTranslate <- function (object, inn = NULL, out = NULL, pb = FALSE, 
     greek = FALSE, ...) {
 	text <- object

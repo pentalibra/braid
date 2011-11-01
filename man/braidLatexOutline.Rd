@@ -2,16 +2,18 @@
 \alias{braidLatexOutline}
 \title{Creates latex outline file}
 \usage{
-  braidLatexOutline(outputFilename, content_filename,
-  title, author)
+  braidLatexOutline(b, fileOuter = b$fileOuter, fileInner =
+  b$fileInner, title, author)
 }
 \arguments{
-  \item{outputFilename}{The file name to use when writing
-  the outline to disk}
+  \item{b}{braid object}
 
-  \item{content_filename}{The name of the braid content
-  file (this is embedded in the outline file using a
-  \\input{} statement in Latex}
+  \item{fileOuter}{The full file path and name to use when
+  writing the outline to disk}
+
+  \item{fileInner}{The name of the braid content file (this
+  is embedded in the outline file using a \\input{}
+  statement in Latex}
 
   \item{title}{Document title.  You can use valid latex,
   including newline \\ - remember to use escape sequences}
