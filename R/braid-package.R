@@ -30,11 +30,11 @@
 #' \item{\code{\link{braidLatexOutline}}}
 #' \item{\code{\link{braidCompile}}}
 #' } 
-#' @name package-braid
-#' @aliases braid package-braid
+#' @name braid-package
+#' @aliases braid braid-package
 #' @docType package
-#' @import plyr Hmisc xtable tools
-#' @title Tools for reporting on survey objects.
+#' @import Hmisc xtable tools
+#' @title A report writing system to create latex output from R.
 #' @author Andrie de Vries \email{andrie.de.vries@@pentalibra.com}
 #' @keywords package
 
