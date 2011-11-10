@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2011.9.28)  1 NOV 2011 16:33
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2011.9.28)  10 NOV 2011 17:28
 entering extended mode
 **f:/git/braid/braid/inst/doc/./braid.tex
 (f:/git/braid/braid/inst/doc/./braid.tex
@@ -29,7 +29,7 @@ File: size10.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 \abovecaptionskip=\skip41
 \belowcaptionskip=\skip42
 \bibindent=\dimen102
-) ("C:/Program Files/R/R-2.13.2/share/texmf/tex/latex\Sweave.sty"
+) (c:/apps/R/R-2.14.0/share/texmf/tex/latex\Sweave.sty
 Package: Sweave 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\ifthen.sty"
 Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
@@ -68,7 +68,7 @@ Style option: `fancyvrb' v2.7a, with DG/SPQR fixes, and firstline=lastline fix
 \c@FancyVerbLine=\count89
 \FV@StepNumber=\count90
 \FV@OutFile=\write3
-) ("C:/Program Files/R/R-2.13.2/share/texmf/tex/latex\upquote.sty"
+) (c:/apps/R/R-2.14.0/share/texmf/tex/latex\upquote.sty
 Package: upquote 2003/08/11 v1.1 Covington's upright-quote modification to verb
 atim and verb
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\textcomp.sty"
@@ -209,8 +209,12 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <8> on input line 22.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 22.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 24.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 24.
 LaTeX Font Info:    Try loading font information for TS1+aer on input line 28.
-("C:/Program Files/R/R-2.13.2/share/texmf/tex/latex\ts1aer.fd"
+(c:/apps/R/R-2.14.0/share/texmf/tex/latex\ts1aer.fd
 File: ts1aer.fd 
 )
 LaTeX Font Info:    Font shape `TS1/aer/m/n' in size <10> not available
@@ -228,7 +232,7 @@ and I'll forget about whatever was undefined.
 LaTeX Font Info:    Try loading font information for TS1+aett on input line 97.
 
 
-("C:/Program Files/R/R-2.13.2/share/texmf/tex/latex\ts1aett.fd"
+(c:/apps/R/R-2.14.0/share/texmf/tex/latex\ts1aett.fd
 File: ts1aett.fd 
 )
 LaTeX Font Info:    Try loading font information for TS1+cmtt on input line 97.
@@ -242,13 +246,13 @@ LaTeX Font Info:    Font shape `TS1/aett/m/sl' in size <10> not available
  [2] [3]
 (f:\git\braid\braid\inst\doc\braid.aux) ) 
 Here is how much of TeX's memory you used:
- 2387 strings out of 494045
- 33229 string characters out of 3146017
+ 2393 strings out of 494045
+ 33202 string characters out of 3146017
  77220 words of memory out of 3000000
- 5644 multiletter control sequences out of 15000+200000
- 22268 words of font info for 54 fonts, out of 3000000 for 9000
+ 5647 multiletter control sequences out of 15000+200000
+ 24423 words of font info for 57 fonts, out of 3000000 for 9000
  715 hyphenation exceptions out of 8191
- 35i,6n,21p,318b,280s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 35i,6n,21p,318b,279s stack positions out of 5000i,500n,10000p,200000b,50000s
  <C:\Users\Andrie\AppData\Local\MiKTeX
 \2.9\fonts\pk\ljfour\jknappen\ec\dpi600\tcst1000.pk> <C:\Users\Andrie\AppData\L
 ocal\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\tcrm1000.pk><C:/Program File
@@ -256,12 +260,13 @@ s (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program Files
 (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files (x8
 6)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files (x86)/
 MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Program Files (x86)/MiK
-TeX 2.9/fonts/type1/public/amsfonts/cm/cmsltt10.pfb><C:/Program Files (x86)/MiK
-TeX 2.9/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Program Files (x86)/MiKTe
-X 2.9/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on braid.pdf (3 pages, 97054 bytes).
+TeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Program Files (x86)/MiKTeX 
+2.9/fonts/type1/public/amsfonts/cm/cmsltt10.pfb><C:/Program Files (x86)/MiKTeX 
+2.9/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Program Files (x86)/MiKTeX 2.
+9/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on braid.pdf (3 pages, 104858 bytes).
 PDF statistics:
- 50 PDF objects out of 1000 (max. 8388607)
+ 54 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

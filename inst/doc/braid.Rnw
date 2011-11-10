@@ -20,7 +20,7 @@
 
 \maketitle
 
-\braid{} is a package that makes it easy to create PDF report in R without having to learn SWeave or Latex.  It creates a few high level R functions to control the creation and compilation of LaTEX statements:
+\braid{} is a package that makes it easy to create PDF report in R without having to learn SWeave or \LaTeX{}.  It creates a few high level R functions to control the creation and compilation of \LaTeX{} statements:
 
 Create a new braid: 
 \begin{itemize}
@@ -50,15 +50,15 @@ Compile to PDF:
 
 There are several report writing packages that uses markup code to create reports in R.  This includes SWeave, Brew and ODFweave.
 
-To use these packages, the user will write markup code with embedded R statements.  For example, in SWeave, the user writes LaTEX statements which are then weaved to split the markup into R statements and Latex statements.
+To use these packages, the user will write markup code with embedded R statements.  For example, in SWeave, the user writes \LaTeX{} statements which are then weaved to split the markup into R statements and \LaTeX{} statements.
 
-Braid approaches this problem from the other direction.  In other words, the user always write R code.  The results of this code are then wrapped in Latex statements and saved to a .tex file.
+Braid approaches this problem from the other direction.  In other words, the user always write R code.  The results of this code are then wrapped in \LaTeX{} statements and saved to a .tex file.
 
 Finally, braid provides a wrapper function around \code{\link[tools]{tex2dvi}} that "compiles" the document into PDF.
 
-In principle, the package can be extended to also support compilation to HTML or ODF formats, but at the moment only PDF via Latex is supported.
+In principle, the package can be extended to also support compilation to HTML or ODF formats, but at the moment only PDF via \LaTeX{} is supported.
 
-Why call it \braid{}?  Because braiding extends the visual image of weave. R code is braided first into Latex and then to PDF. 
+Why call it \braid{}?  Because braiding extends the visual image of weave. R code is braided first into \LaTeX{} and then to PDF. 
 
 
 \section{Setting up a braid}
@@ -67,7 +67,8 @@ First, set up a braid object.  The following code sets up a braid object.  A bra
 
 <<echo=TRUE>>=
 library(braid)
-path <- file.path("f:", "git", "braid", "test", "latex")
+path <- file.path(getwd(), "latex")
+if(!file.exists(path)) dir.create(path)
 
 outlineFile <- file.path(path, "Outline.tex")
 contentFile <- "Content.tex"
