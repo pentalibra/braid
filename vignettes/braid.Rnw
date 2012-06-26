@@ -1,0 +1,133 @@
+\documentclass[a4paper]{article}
+
+%\VignetteIndexEntry{Introduction to braid}
+%\VignettePackage{braid}
+
+% Definitions
+%\newcommand{\slan}{{\tt S}}
+%\newcommand{\rlan}{{\tt R}}
+\newcommand{\braid}{{\tt braid}}
+\newcommand{\code}[1]{{\tt #1}}
+\setlength{\parindent}{0in}
+\setlength{\parskip}{.1in}
+\setlength{\textwidth}{140mm}
+\setlength{\oddsidemargin}{10mm}
+
+\title{Introduction to the \braid{} package for creating PDF reports in R}
+\author{Andrie de Vries}
+
+\begin{document}
+
+\maketitle
+
+\braid{} is a package that makes it easy to create PDF report in R without having to learn SWeave or \LaTeX{}.  It creates a few high level R functions to control the creation and compilation of \LaTeX{} statements:
+
+Create a new braid: 
+\begin{itemize}
+	\item \code{as.braid()}
+\end{itemize}
+
+Report writing commands:
+\begin{itemize}
+	\item \code{braidHeading()}
+	\item \code{braidWrite()}
+	\item \code{braidPlot()}
+\end{itemize}
+
+Save results to file:
+\begin{itemize}
+	\item \code{braidSave()}
+\end{itemize}
+
+Compile to PDF:
+\begin{itemize}
+	\item \code{braidLatexOutline()}
+	\item \code{braidCompile()}
+\end{itemize}
+	
+
+\section{Introduction}
+
+There are several report writing packages that uses markup code to create reports in R.  This includes SWeave, Brew and ODFweave.
+
+To use these packages, the user will write markup code with embedded R statements.  For example, in SWeave, the user writes \LaTeX{} statements which are then weaved to split the markup into R statements and \LaTeX{} statements.
+
+Braid approaches this problem from the other direction.  In other words, the user always write R code.  The results of this code are then wrapped in \LaTeX{} statements and saved to a .tex file.
+
+Finally, braid provides a wrapper function around \code{texi2dvi} that "compiles" the document into PDF.
+
+In principle, the package can be extended to also support compilation to HTML or ODF formats, but at the moment only PDF via \LaTeX{} is supported.
+
+Why call it \braid{}?  Because braiding extends the visual image of weave. R code is braided first into \LaTeX{} and then to PDF. 
+
+
+\section{Setting up a braid}
+
+First, set up a braid object.  The following code sets up a braid object.  A braid object sets up a text file that will contain the report code.
+
+<<echo=TRUE>>=
+library(braid)
+path <- file.path(getwd(), "latex")
+if(!file.exists(path)) dir.create(path)
+
+outlineFile <- file.path(path, "Outline.tex")
+contentFile <- "Content.tex"
+pdfFile <- "Outline.pdf"
+
+b <- as.braid(path = path, fileOuter=outlineFile, fileInner = contentFile)
+@
+
+\section{Create some report output}
+
+Next, create some headings, text and graphics to go into the report.
+
+There are three essential report elements in a typical report:
+
+\begin{itemize}
+	\item \code{braidHeading()}
+	\item \code{braidWrite()}
+	\item \code{braidPlot()}
+\end{itemize}
+
+
+<<echo=TRUE>>=
+braidHeading(b, "This is a test")
+braidWrite(b, "This should be a normal paragraph.")
+braidWrite(b, "Let's create a simple plot.")
+
+library(ggplot2)
+p <- ggplot(iris, aes(x=Sepal.Length, y=Sepal.Width)) + 
+    geom_point(alpha=0.5)
+braidPlot(b, p)
+@
+
+\section{Save and compile results}
+
+To save and compile:
+
+<<echo=TRUE>>=
+braidSave(b)
+braidLatexOutline(b,
+    title="Test",
+    author="I am the author")
+braidCompile(b)
+@
+
+If you have not received any error messages, the pdf output should now be ready to view.
+
+
+\section{Final thoughts}
+
+The last word....
+
+
+% Start a new page
+% Not echoed, not evaluated
+% ONLY here for checkVignettes so that all output doesn't
+% end up on one enormous page
+
+\end{document}
+
+
+
+
