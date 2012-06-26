@@ -3,7 +3,7 @@
 \title{Compiles braid latex file to PDF.}
 \usage{
   braidCompile(b, fileOuter = b$fileOuter, output = "pdf",
-  useXelatex = TRUE)
+    useXelatex = TRUE)
 }
 \arguments{
   \item{b}{A braid object}

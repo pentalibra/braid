@@ -2,8 +2,8 @@
 \alias{latexTranslate}
 \title{Prints a string to Latex, dealing with special characters.}
 \usage{
-  latexTranslate(object, inn = NULL, out = NULL, pb =
-  FALSE, greek = FALSE, ...)
+  latexTranslate(object, inn = NULL, out = NULL,
+    pb = FALSE, greek = FALSE, ...)
 }
 \arguments{
   \item{object}{A string containing question text}

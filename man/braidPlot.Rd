@@ -2,9 +2,10 @@
 \alias{braidPlot}
 \title{Saves braid plot to pdf.}
 \usage{
-  braidPlot(braid, plotcode, filename =
-  braidFilename(braid), width = braid$defaultPlotSize[1],
-  height = braid$defaultPlotSize[2], Qid = NA)
+  braidPlot(braid, plotcode,
+    filename = braidFilename(braid),
+    width = braid$defaultPlotSize[1],
+    height = braid$defaultPlotSize[2], Qid = NA)
 }
 \arguments{
   \item{braid}{A braid object}

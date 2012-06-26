@@ -1,6 +1,5 @@
 \docType{package}
 \name{braid-package}
-\alias{"braid-package"}
 \alias{braid}
 \alias{braid-package}
 \title{A report writing system to create latex output from R.}

@@ -2,8 +2,8 @@
 \alias{braidLatexOutline}
 \title{Creates latex outline file}
 \usage{
-  braidLatexOutline(b, fileOuter = b$fileOuter, fileInner =
-  b$fileInner, title, author)
+  braidLatexOutline(b, fileOuter = b$fileOuter,
+    fileInner = b$fileInner, title, author)
 }
 \arguments{
   \item{b}{braid object}

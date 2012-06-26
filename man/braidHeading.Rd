@@ -3,7 +3,7 @@
 \title{Creates braid heading in latex format and writes results to output file.}
 \usage{
   braidHeading(braid, x, headinglevel = "chapter",
-  pagebreak = FALSE)
+    pagebreak = FALSE)
 }
 \arguments{
   \item{braid}{A braid object}

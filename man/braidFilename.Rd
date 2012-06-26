@@ -2,8 +2,9 @@
 \alias{braidFilename}
 \title{Generates filename to use when saving plots.}
 \usage{
-  braidFilename(b, counter = braidIncCounter(b), prefix =
-  "fig", format = "default", suffix = "", ext = ".pdf")
+  braidFilename(b, counter = braidIncCounter(b),
+    prefix = "fig", format = "default", suffix = "",
+    ext = ".pdf")
 }
 \arguments{
   \item{b}{A braid object}

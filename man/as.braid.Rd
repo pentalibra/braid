@@ -2,10 +2,11 @@
 \alias{as.braid}
 \title{Creates object of class braid.}
 \usage{
-  as.braid(path = Sys.getenv()["TEMP"], graphics =
-  "graphics", fileOuter = "outline.tex", fileInner =
-  "braid.tex", counterStart = 1, defaultPlotSize = c(5, 3),
-  dpi = 600)
+  as.braid(path = tempdir(), graphics = "graphics",
+    fileOuter = "outline.tex", fileInner = "braid.tex",
+    counterStart = 1, defaultPlotSize = c(5, 3), dpi = 600,
+    outputType = c("latex", "ppt", "device"),
+    graphicFormat = c("pdf", "wmf"))
 }
 \arguments{
   \item{path}{Character vector: File path where latex
@@ -28,6 +29,14 @@
   size in inches, e.g. c(4, 3)}
 
   \item{dpi}{Dots per inch, passed to ggsave()}
+
+  \item{outputType}{Character string specifying the
+  destination of output: "latex", "ppt" or "device".  If
+  "device", graphs are sent to the default device
+  (typically the RGgui plot terminal)}
+
+  \item{graphicFormat}{Device type for saving graphic
+  plots.  Currently only pdf and wmf is supported.}
 }
 \value{
   A list object of class braid

@@ -2,8 +2,8 @@
 \alias{braidAppendPlot}
 \title{Appends braid plot.}
 \usage{
-  braidAppendPlot(braid, plot = NULL, filename = "", width
-  = 4, height = 3, Qid = NA, reset = FALSE)
+  braidAppendPlot(braid, plot = NULL, filename = "",
+    width = 4, height = 3, Qid = NA, reset = FALSE)
 }
 \arguments{
   \item{braid}{A braid object}

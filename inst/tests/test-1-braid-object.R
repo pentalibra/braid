@@ -3,16 +3,21 @@
 # Author: Andrie
 #------------------------------------------------------------------------------
 
-path <- file.path("f:", "git", "braid", "test")
+path <- tempdir()
 latex_path <- file.path(path, "latex")
+dir.create(latex_path, recursive=TRUE)
 graph_path <- file.path(latex_path, "graphics")
+dir.create(graph_path, recursive=TRUE)
 sinkfile   <- file.path(latex_path, "braid_test.tex")
 
-file.remove(list.files(graph_path, full.names=TRUE))
-if (file.exists(file.path(latex_path, sinkfile))){
-  file.remove(file.path(latex_path, sinkfile))
+clearFiles <- function(){
+  file.remove(list.files(graph_path, full.names=TRUE))
+  if (file.exists(file.path(latex_path, sinkfile))){
+    file.remove(file.path(latex_path, sinkfile))
+  }
 }
 
+clearFiles()
 
 #------------------------------------------------------------------------------
 
@@ -65,7 +70,7 @@ b <- as.braid(path=latex_path, fileInner="braid_test.tex")
 
 require(ggplot2)
 t1 <- ggplot(mtcars, aes(factor(cyl))) + geom_bar()
-t2 <- ggplot(mtcars, aes(factor(cyl))) + geom_point()
+t2 <- ggplot(mtcars, aes(x=hp, y=cyl)) + geom_point()
 
 test_that("plotAppender returns correct value", {
       
@@ -105,6 +110,9 @@ test_that("plotAppender correctly appends third value", {
       expect_equal(braidAppendPlot(b), rest)
     })
 
+braidSave(b)
+clearFiles()
+unlink(path, recursive=TRUE)
 
 
 

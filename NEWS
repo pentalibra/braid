@@ -1,28 +1,32 @@
-braid 0.1-05
+braid 0.1-05 (12/5/2012)
 ------------
+
+Changes
+* Minor changes to compile on Linux
 
 braid 0.1-04 (1/11/2011)
 ------------
-IMPROVEMENTS
+
+Improvements
 * braidCompile and braidLatexOutline now takes braid object as argument and automatically determines location of file to compile
 
 braid 0.1-03
 ------------
 
-IMPROVEMENTS
+Improvements
 * Simplified file and path arguments to as.braid: file now only takes filename, not path
 * Now imports packages, rather than declaring dependency 
 
 braid 0.0-09
 ------------
 
-IMPROVEMENTS
+Improvements
 * braidPlot no longer creates output files immediately.  Instead, all plots are queued and all saved when braidSave is called. 
 
 braid 0.0-06
 ------------
 
-IMPROVEMENTS AND BUG FIXES
+Improvements
 * Changed all function names to camelCase
 
 braid 0.0-06

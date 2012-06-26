@@ -6,9 +6,11 @@
 
 
 
-path <- file.path("f:", "git", "braid", "test")
+path <- tempdir()
 latex_path <- file.path(path, "latex")
+dir.create(latex_path, recursive=TRUE)
 graph_path <- file.path(latex_path, "graphics")
+dir.create(graph_path, recursive=TRUE)
 sinkfile   <- file.path(latex_path, "braid_test.tex")
 
 clearFiles <- function(){
@@ -109,3 +111,5 @@ test_that("braidPlot saves trellis plot", {
     })
 
 
+clearFiles()
+unlink(path, recursive=TRUE)
