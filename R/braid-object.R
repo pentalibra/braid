@@ -15,16 +15,21 @@
 #' @param counterStart The starting number for a counter used to store graphs, defaults to 1
 #' @param defaultPlotSize Numeric vector of length 2: Plot size in inches, e.g. c(4, 3)
 #' @param dpi Dots per inch, passed to ggsave()
+#' @param outputType Character string specifying the destination of output: "latex", "ppt" or "device".  If "device", graphs are sent to the default device (typically the RGgui plot terminal)
+#' @param graphicFormat Device type for saving graphic plots.  Currently only pdf and wmf is supported.
 #' @return A list object of class braid
-#' @export
+#' @export 
 as.braid <- function(
-    path = Sys.getenv()["TEMP"],
+    path = tempdir(),
     graphics = "graphics",
     fileOuter = "outline.tex",
     fileInner = "braid.tex",
     counterStart = 1,
     defaultPlotSize = c(5,3),
-    dpi = 600
+    dpi = 600,
+    outputType = c("latex", "ppt", "device"),
+    graphicFormat = c("pdf", "wmf")
+    
 ){
   ### test that paths exist
   if (!file_test("-d", path)){
@@ -42,6 +47,10 @@ as.braid <- function(
   if(file.exists(fileInner)) file.remove(fileInner)
   file.create(fileInner)
   
+  outputType <- match.arg(outputType)
+  graphicFormat <- match.arg(graphicFormat)
+  if(!is.null(outputType) && outputType=="ppt") graphicFormat <- "wmf"
+  
   structure(
       list(
           pathLatex           = path,
@@ -50,12 +59,22 @@ as.braid <- function(
           fileInner           = fileInner,
           defaultPlotSize     = defaultPlotSize,
           dpi                 = dpi,
+          outputType          = outputType,
+          graphicFormat       = graphicFormat,
           counter             = newCounter(counterStart) ,
           appender            = newAppender(),
           plotAppender        = newPlotAppender()
     ), 
       class = "braid"
   )
+}
+
+#' Tests that object is of class braid.
+#' 
+#' @param x Object to be tested
+#' @export
+is.braid <- function(x){
+  inherits(x, "braid")
 }
 
 

@@ -78,7 +78,7 @@ braidSavePlotOne <- function(plotElement, braid){
                     height   = height
                 ),
                 wmf=win.metafile(
-                    file=file.path(braid$pathGraphics, filename),
+                    filename=file.path(braid$pathGraphics, filename),
                     width    = width, 
                     height   = height
                 )

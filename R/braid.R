@@ -4,6 +4,22 @@
 #------------------------------------------------------------------------------
 
 
+#' Appends text to braid output file.
+#' 
+#' Appends text to braid output file.
+#' 
+#' @param braid A braid object
+#' @param x A character vector of text
+#' @param suffix A character vector to be appended to x, by default a line break
+#' @export
+braidWrite <- function(braid, x, suffix="default"){
+  if(suffix=="default") suffix <- "\n"
+  braidAppendText(braid, paste(x, suffix, sep=""))
+  invisible(NULL)
+}
+
+#------------------------------------------------------------------------------
+
 #' Creates braid heading in latex format and writes results to output file. 
 #' 
 #' Creates braid heading
@@ -20,21 +36,6 @@ braidHeading <- function(braid, x, headinglevel="chapter", pagebreak=FALSE){
   invisible(NULL)
 }
 
-#------------------------------------------------------------------------------
-
-#' Appends text to braid output file.
-#' 
-#' Appends text to braid output file.
-#' 
-#' @param braid A braid object
-#' @param x A character vector of text
-#' @param suffix A character vector to be appended to x, by default a line break
-#' @export
-braidWrite <- function(braid, x, suffix="default"){
-  if(suffix=="default") suffix <- "\n"
-  braidAppendText(braid, paste(x, suffix, sep=""))
-  invisible(NULL)
-}
 
 #------------------------------------------------------------------------------
 
@@ -86,8 +87,8 @@ braidCompile <- function(b, fileOuter=b$fileOuter, output="pdf", useXelatex = TR
     # Checks that xelatex is installed
     if(as.logical(Sys.which("xelatex")=="")) stop("braidCompile: xelatex is not installed")
     # Compile latex file to PDF using xelatex
-    res <- shell(cmd=paste("xelatex --interaction=batchmode", 
-            basename(fileOuter)), mustWork=TRUE, intern=TRUE)
+    res <- system(command=paste("xelatex --interaction=batchmode", 
+            basename(fileOuter)), intern=TRUE)
     print(tail(res, 2))
   } else {
     # Compile latex file to PDF using texi2dvi

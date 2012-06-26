@@ -34,8 +34,8 @@ braidLatexOutline <- function(b, fileOuter=b$fileOuter, fileInner=b$fileInner, t
   \\renewcommand{\\familydefault}{\\sfdefault}  %specify sans serif font
 
   \\usepackage{fontspec}
-  \\setmainfont{Arial Unicode MS}
-      
+  %\\setmainfont{Arial Unicode MS}
+  %\\setmainfont{Unifont}      
   \\usepackage{fancyhdr}
   \\pagestyle{fancy}
   \\lhead{} %Sets top left header to nothing
